@@ -122,7 +122,7 @@ const Login= ()=>{
                 //     setResponse(res)
                 // })
 
-                fetch(`${process.env.REACT_APP_API_SERVER}/api/login`,{
+               await fetch(`${process.env.REACT_APP_API_SERVER}/api/login`,{
                   method: 'POST',
                   body: JSON.stringify(creds),
                   credentials:'include',
