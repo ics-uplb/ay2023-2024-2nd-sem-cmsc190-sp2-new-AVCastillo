@@ -12,13 +12,13 @@ const app = express()
 
 //middlewares
 app.use(cors({
-    origin: 'https://uplbattedancetracker.vercel.app',
+    origin: 'https://uplbattedancetracker.vercel.app/',
     credentials:true
 }))
 
 // // allow CORS
 app.use((req, res, next) => {
-    res.setHeader("Access-Control-Allow-Origin", "https://uplbattedancetracker.vercel.app");
+    res.setHeader("Access-Control-Allow-Origin", "https://uplbattedancetracker.vercel.app/");
     res.setHeader("Access-Control-Allow-Methods", "POST, GET");
     res.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers,Access-Control-Allow-Methods,Origin,Accept,Content-Type, Authorization");
     res.setHeader("Access-Control-Allow-Credentials","true");
