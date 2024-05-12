@@ -127,7 +127,7 @@ const Login= ()=>{
                   body: JSON.stringify(creds),
                   credentials:'include',
                   headers:{
-                    'Content-Type':'application/json'
+                    'Content-Type':'application/json' 
                   }
                   ,
                   mode:'cors'
