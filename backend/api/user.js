@@ -46,6 +46,8 @@ const signUP= async (req,res)=>{
 
 const logIn= async (req,res)=>{
     console.log("pasok")
+    console.log(req.body)
+
     const {email,password}= await req.body
     const exist= await user.findOne({email: email})
     if(exist){

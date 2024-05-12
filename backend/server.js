@@ -12,7 +12,7 @@ const app = express()
 
 //middlewares
 app.use(cors({
-    origin: 'https://uplbattedancetracker.vercel.app/',
+    origin: '*',
     credentials:true,
     methods: ['GET', 'POST'],
     allowedHeaders: ['Content-Type', 'Authorization',"Access-Control-Allow-Headers,","Access-Control-Allow-Methods","Origin","Accept"]
