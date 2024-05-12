@@ -45,11 +45,11 @@ const signUP= async (req,res)=>{
 }
 
 const logIn= async (req,res)=>{
-   
+    console.log("pasok")
     const {email,password}= await req.body
     const exist= await user.findOne({email: email})
     if(exist){
-        
+        console.log("pasok2")
         exist.comparePassword(password, (err,isMatch)=>{
             if(err || !isMatch){
                 res.status(400).json({error:"WRONG_PASSWORD"})
@@ -65,7 +65,11 @@ const logIn= async (req,res)=>{
                         res.cookie("loggedInUsers",[exist._id])
                     }
                 }
-                res.cookie("token",token,{maxAge:3600000}).json(exist)
+                res.cookie("token",token,{
+                    httpOnly:true,
+                    secure:true,
+                    sameSite:"None",
+                    maxAge:3600000}).json(exist)
                
             }
 
