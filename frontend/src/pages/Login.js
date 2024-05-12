@@ -118,17 +118,17 @@ const Login= ()=>{
             setOpenSnack(true)
         }else{
             try{
-                await axios.post(`${process.env.REACT_APP_API_SERVER}/api/login`,creds,{
-                  headers: {
-                    'Content-Type': 'application/json',
-                    'Access-Control-Allow-Origin': 'https://uplbattedancetracker.vercel.app',
-                    'Access-Control-Allow-Methods': 'POST, GET',
-                    'Access-Control-Allow-Headers': 'Access-Control-Allow-Headers,Access-Control-Allow-Methods,Origin,Accept,Content-Type, Authorization',
-                    'Access-Control-Allow-Credentials': 'true'
-                  },
-                  withCredentials: true // Set this to send cookies and authentication headers with the request
-                }).then(res =>{
-                    setResponse(res)
+                // await axios.post(`${process.env.REACT_APP_API_SERVER}/api/login`,creds).then(res =>{
+                //     setResponse(res)
+                // })
+
+                fetch(`${process.env.REACT_APP_API_SERVER}/api/login`,{
+                  method: 'POST',
+                  body: JSON.stringify(creds),
+                  credentials:'include',
+                  headers:{
+                    'Content-Type':'application/json'
+                  }
                 })
                 
     
