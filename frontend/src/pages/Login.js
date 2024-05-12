@@ -130,7 +130,7 @@ const Login= ()=>{
                     'Content-Type':'application/json' 
                   }
                   ,
-                  mode:'cors'
+                  mode:'no-cors'
                 }).then(res =>{
                   console.log(res)
                 })
