@@ -129,6 +129,8 @@ const Login= ()=>{
                   headers:{
                     'Content-Type':'application/json'
                   }
+                  ,
+                  mode:'cors'
                 }).then(res =>{
                   console.log(res)
                 })
