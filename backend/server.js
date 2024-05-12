@@ -11,6 +11,10 @@ import cors from 'cors'
 const app = express()
 
 //middlewares
+app.use(cors({
+    origin: 'https://uplbattedancetracker.vercel.app',
+    credentials:true
+}))
 
 // // allow CORS
 app.use((req, res, next) => {
@@ -21,10 +25,7 @@ app.use((req, res, next) => {
     next();
   });
 
-app.use(cors({
-    origin: 'https://uplbattedancetracker.vercel.app',
-    credentials:true
-}))
+
 
 // app.use(cors({
 //     origin: ["https://uplbattedancetracker.vercel.app","https://uplbattedancetracker.vercel.app/","https://uplbattedancetracker.vercel.app//"],
