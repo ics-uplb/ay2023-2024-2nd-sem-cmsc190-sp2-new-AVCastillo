@@ -88,8 +88,11 @@ const editSubmittedExcuse= async(req,res)=>{
 }
 
 const getAllIndivAttendances= async(req,res)=>{
+    // console.log("pasok")
     try{
-        const indivs= await indivAttendanceModel.find({submittedExcuse:true, classId:req})
+        const indivs= await indivAttendanceModel.find({submittedExcuse:true, classId:req.query.classId})
+        // console.log("pasok")
+        console.log(indivs)
         res.status(200).json(indivs.reverse())
     }catch(err){
         res.json({error:err.message})

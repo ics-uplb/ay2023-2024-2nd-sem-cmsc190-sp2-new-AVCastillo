@@ -28,6 +28,7 @@ const ExcuseLetters=()=>{
         let pdfArray=[]
         let pdfNameArray=[]
         let dateSubmitArray=[]
+        console.log(indivs)
         for (const indiv of indivs.data){
           const letter = await axios.get(`/api/getClassExcuseLetters?indivAttendanceId=${indiv._id}`,{
                 responseType: 'blob'})

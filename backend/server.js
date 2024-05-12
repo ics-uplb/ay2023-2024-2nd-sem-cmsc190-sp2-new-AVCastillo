@@ -19,6 +19,17 @@ app.use((req,res,next)=>{
     next()
 })
 
+// allow CORS
+app.use((req, res, next) => {
+    res.setHeader("Access-Control-Allow-Origin", "https://uplbattedancetracker.vercel.app/");
+    res.setHeader("Access-Control-Allow-Methods", "POST, GET");
+    res.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers,Access-Control-Allow-Methods,Origin,Accept,Content-Type, Authorization");
+    res.setHeader("Access-Control-Allow-Credentials","true");
+    next();
+  });
+
+
+
 const connectToMongo= async ()=>{
     try{
         await mongoose.connect(process.env.MONGO_URI)
@@ -46,14 +57,7 @@ connectToMongo();
 
 
 
-// allow CORS
-// app.use((req, res, next) => {
-//     res.setHeader("Access-Control-Allow-Origin", "http://localhost:3001");
-//     res.setHeader("Access-Control-Allow-Methods", "POST");
-//     res.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers,Access-Control-Allow-Methods,Origin,Accept,Content-Type");
-//     res.setHeader("Access-Control-Allow-Credentials","true");
-//     next();
-//   });
+
 
 
 

@@ -17,6 +17,7 @@ import LoginIcon from '@mui/icons-material/Login';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import { createTheme, ThemeProvider } from '@mui/material';
+import dotenv from'dotenv';
 
 const theme = createTheme({
   components: {
@@ -118,7 +119,7 @@ const Login= ()=>{
             setOpenSnack(true)
         }else{
             try{
-                await axios.post(`/api/login`,creds,).then(res =>{
+                await axios.post(`${process.env.REACT_APP_API_SERVER}/api/login`,creds,).then(res =>{
                     setResponse(res)
                 })
                 
