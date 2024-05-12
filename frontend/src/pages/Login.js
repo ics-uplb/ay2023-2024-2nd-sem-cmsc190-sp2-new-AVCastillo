@@ -17,8 +17,7 @@ import LoginIcon from '@mui/icons-material/Login';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import { createTheme, ThemeProvider } from '@mui/material';
-import dotenv from 'dotenv';
-dotenv.config()
+
 const theme = createTheme({
   components: {
     MuiButton: {
