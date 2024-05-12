@@ -118,22 +118,22 @@ const Login= ()=>{
             setOpenSnack(true)
         }else{
             try{
-                // await axios.post(`${process.env.REACT_APP_API_SERVER}/api/login`,creds).then(res =>{
-                //     setResponse(res)
-                // })
-
-               await fetch(`${process.env.REACT_APP_API_SERVER}/api/login`,{
-                  method: 'POST',
-                  body: JSON.stringify(creds),
-                  credentials:'include',
-                  headers:{
-                    'Content-Type':'application/json' 
-                  }
-                  ,
-                  mode:'cors'
-                }).then(res =>{
-                  console.log(res)
+                await axios.post(`${process.env.REACT_APP_API_SERVER}/api/login`,creds,{headers:{"Access-Control-Allow-Origin":'*'},withCredentials:true}).then(res =>{
+                    setResponse(res)
                 })
+
+              //  await fetch(`${process.env.REACT_APP_API_SERVER}/api/login`,{
+              //     method: 'POST',
+              //     body: JSON.stringify(creds),
+              //     credentials:'include',
+              //     headers:{
+              //       'Content-Type':'application/json' 
+              //     }
+              //     ,
+              //     mode:'cors'
+              //   }).then(res =>{
+              //     console.log(res)
+              //   })
                 
     
                 setEmail('')

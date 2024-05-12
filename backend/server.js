@@ -11,21 +11,21 @@ import cors from 'cors'
 const app = express()
 
 //middlewares
-app.use(cors({
-    origin: '*',
-    credentials:true,
-    methods: ['GET', 'POST'],
-    allowedHeaders: ['Content-Type', 'Authorization',"Access-Control-Allow-Headers,","Access-Control-Allow-Methods","Origin","Accept"]
-}))
+// app.use(cors({
+//     origin: '*',
+//     credentials:true,
+//     methods: ['GET', 'POST'],
+//     allowedHeaders: ['Content-Type', 'Authorization',"Access-Control-Allow-Headers,","Access-Control-Allow-Methods","Origin","Accept"]
+// }))
 
 // // allow CORS
-// app.use((req, res, next) => {
-//     res.setHeader("Access-Control-Allow-Origin", "https://uplbattedancetracker.vercel.app/");
-//     res.setHeader("Access-Control-Allow-Methods", "POST, GET");
-//     res.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers,Access-Control-Allow-Methods,Origin,Accept,Content-Type, Authorization");
-//     res.setHeader("Access-Control-Allow-Credentials","true");
-//     next();
-//   });
+app.use((req, res, next) => {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Methods", "POST, GET");
+    res.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers,Access-Control-Allow-Methods,Origin,Accept,Content-Type, Authorization");
+    res.setHeader("Access-Control-Allow-Credentials","true");
+    next();
+  });
 
 
 
