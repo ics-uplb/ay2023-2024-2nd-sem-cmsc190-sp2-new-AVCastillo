@@ -12,6 +12,16 @@ const app = express()
 
 //middlewares
 
+app.use(cors({
+    origin: ["https://uplbattedancetracker.vercel.app","https://uplbattedancetracker.vercel.app/","https://uplbattedancetracker.vercel.app//"],
+    methods: ['GET', 'POST'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    
+    //     res.setHeader("Access-Control-Allow-Credentials","true");
+  }));
+
+
+
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser())
@@ -20,21 +30,14 @@ app.use((req,res,next)=>{
     next()
 })
 
-// allow CORS
+// // allow CORS
 // app.use((req, res, next) => {
-//     res.setHeader("Access-Control-Allow-Origin", ["https://uplbattedancetracker.vercel.app","https://uplbattedancetracker.vercel.app/","https://uplbattedancetracker.vercel.app//"]);
+//     res.setHeader("Access-Control-Allow-Origin", "https://uplbattedancetracker.vercel.app");
 //     res.setHeader("Access-Control-Allow-Methods", "POST, GET");
 //     res.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers,Access-Control-Allow-Methods,Origin,Accept,Content-Type, Authorization");
 //     res.setHeader("Access-Control-Allow-Credentials","true");
 //     next();
 //   });
-app.use(cors({
-    origin: ["https://uplbattedancetracker.vercel.app","https://uplbattedancetracker.vercel.app/","https://uplbattedancetracker.vercel.app//"],
-    methods: ['GET', 'POST'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    
-    //     res.setHeader("Access-Control-Allow-Credentials","true");
-  }));
 
 
 const connectToMongo= async ()=>{
