@@ -6,6 +6,7 @@ import cookieParser from 'cookie-parser';
 // require('dotenv').config()
 import express from 'express'
 import setUpRoutes from './routes.js'
+import cors from 'cors'
 
 const app = express()
 
@@ -20,14 +21,20 @@ app.use((req,res,next)=>{
 })
 
 // allow CORS
-app.use((req, res, next) => {
-    res.setHeader("Access-Control-Allow-Origin", "https://uplbattedancetracker.vercel.app");
-    res.setHeader("Access-Control-Allow-Methods", "POST, GET");
-    res.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers,Access-Control-Allow-Methods,Origin,Accept,Content-Type, Authorization");
-    res.setHeader("Access-Control-Allow-Credentials","true");
-    next();
-  });
-
+// app.use((req, res, next) => {
+//     res.setHeader("Access-Control-Allow-Origin", "https://uplbattedancetracker.vercel.app");
+//     res.setHeader("Access-Control-Allow-Methods", "POST, GET");
+//     res.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers,Access-Control-Allow-Methods,Origin,Accept,Content-Type, Authorization");
+//     res.setHeader("Access-Control-Allow-Credentials","true");
+//     next();
+//   });
+app.use(cors({
+    origin: '*',
+    methods: ['GET', 'POST'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    
+    //     res.setHeader("Access-Control-Allow-Credentials","true");
+  }));
 
 
 const connectToMongo= async ()=>{
