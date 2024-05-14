@@ -19,6 +19,14 @@ const app = express()
 // }))
 
 // // allow CORS
+
+
+const corsOptions = {
+    origin: ["https://uplbattedancetracker.vercel.app"|| ""],
+    credentials: true,
+};
+app.use(cors(corsOptions));
+
 app.use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Origin", "https://uplbattedancetracker.vercel.app");
     res.setHeader("Access-Control-Allow-Methods", "POST, GET");
@@ -27,12 +35,7 @@ app.use((req, res, next) => {
     next();
   });
 
-const corsOptions = {
-    origin: ["https://uplbattedancetracker.vercel.app"|| ""],
-    credentials: true,
-};
 
-app.use(cors(corsOptions));
 
 
 // app.use(cors({
