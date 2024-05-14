@@ -118,7 +118,11 @@ const Login= ()=>{
             setOpenSnack(true)
         }else{
             try{
-                await axios.post(`${process.env.REACT_APP_API_SERVER}/api/login`,creds,{headers:{"Access-Control-Request-Origin":"*","Access-Control-Request-Headers":"*", "Access-Control-Allow-Credentials":"true"}}).then(res =>{
+                await axios.post(`${process.env.REACT_APP_API_SERVER}/api/login`,creds,{
+                  withCredentials: true,
+                  headers: {
+                      "Content-Type": "application/json"
+                  }}).then(res =>{
                     setResponse(res)
                 })
 
