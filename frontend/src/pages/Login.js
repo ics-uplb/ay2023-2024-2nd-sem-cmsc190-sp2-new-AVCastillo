@@ -118,7 +118,7 @@ const Login= ()=>{
             setOpenSnack(true)
         }else{
             try{
-                await axios.post(`${process.env.REACT_APP_API_SERVER}/api/login`,creds,{headers:{"Access-Control-Allow-Origin":'https://catillo-sp.onrender.com'},withCredentials:true}).then(res =>{
+                await axios.post(`${process.env.REACT_APP_API_SERVER}/api/login`,creds,{headers:{"Access-Control-Allow-Origin":'https://uplbattedancetracker.vercel.app/'},withCredentials:true}).then(res =>{
                     setResponse(res)
                 })
 
