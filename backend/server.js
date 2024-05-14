@@ -22,7 +22,7 @@ const app = express()
 
 
 const corsOptions = {
-    origin: ["https://uplbattedancetracker.vercel.app"|| ""],
+    origin: ["https://uplbattedancetracker.vercel.app","https://uplbattedancetracker.vercel.app/","https://uplbattedancetracker.vercel.app//"],
     credentials: true,
 };
 app.use(cors(corsOptions));
