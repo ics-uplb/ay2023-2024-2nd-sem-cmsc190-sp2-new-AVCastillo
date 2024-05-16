@@ -49,7 +49,6 @@ const app = express()
 //     //     res.setHeader("Access-Control-Allow-Credentials","true");
 //   }));
 
-app.use('/',router)
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }));
@@ -66,7 +65,8 @@ const connectToMongo= async ()=>{
     try{
         await mongoose.connect(process.env.MONGO_URI)
         console.log("Connected!")
-        setUpRoutes(app);
+        app.use('/',router)
+
 
         app.listen(process.env.PORT,()=>{
             console.log("Listening on port")
