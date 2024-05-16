@@ -7,6 +7,7 @@ import cookieParser from 'cookie-parser';
 import express from 'express'
 import setUpRoutes from './routes.js'
 import cors from 'cors'
+import router from './routes.js';
 
 const app = express()
 
@@ -21,13 +22,13 @@ const app = express()
 // // allow CORS
 
 
-const corsOptions = {
-    origin: ["https://uplbattedancetracker.vercel.app","https://uplbattedancetracker.vercel.app/","https://uplbattedancetracker.vercel.app//"],
-    credentials: true,
-    methods: ['GET', 'POST', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization']
-};
-app.use(cors(corsOptions));
+// const corsOptions = {
+//     origin: ["https://uplbattedancetracker.vercel.app","https://uplbattedancetracker.vercel.app/","https://uplbattedancetracker.vercel.app//"],
+//     credentials: true,
+//     methods: ['GET', 'POST', 'OPTIONS'],
+//     allowedHeaders: ['Content-Type', 'Authorization']
+// };
+// app.use(cors(corsOptions));
 
 // app.use((req, res, next) => {
 //     res.setHeader("Access-Control-Allow-Origin", "https://uplbattedancetracker.vercel.app");
@@ -48,7 +49,7 @@ app.use(cors(corsOptions));
 //     //     res.setHeader("Access-Control-Allow-Credentials","true");
 //   }));
 
-
+app.use('/',router)
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }));

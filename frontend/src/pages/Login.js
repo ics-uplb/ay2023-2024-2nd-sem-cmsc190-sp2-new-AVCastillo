@@ -119,10 +119,8 @@ const Login= ()=>{
         }else{
             try{
                 await axios.post(`${process.env.REACT_APP_API_SERVER}/api/login`,creds,{
-                  withCredentials: true,
-                  headers: {
-                      "Content-Type": "application/json"
-                  }}).then(res =>{
+                  withCredentials: true
+                 }).then(res =>{
                     setResponse(res)
                 })
 

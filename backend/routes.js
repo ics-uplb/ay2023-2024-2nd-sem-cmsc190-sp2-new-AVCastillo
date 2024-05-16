@@ -7,59 +7,70 @@ import { displayAttendance,displayStudentAttendance,getTeacherAttendance,display
 import { uploadexcuseLetter,getExcuseLetters,getClassExcuseLetters,getPdfName} from "./api/excuseLetter.js";
 import { createNotification,getNotifications,getStudentNotifs } from "./api/notifications.js";
 import multer from "multer";
+import express from 'express'
+import cors from 'cors'
+
+const router=express.Router()
+router.use(
+    cors({
+        origin:"https://uplbattedancetracker.vercel.app", //vercel url
+        credentials:true,
+        methods:["GET","POST"]
+    })
+)
+
 
 const upload = multer({ dest: 'uploads/' });
 
-const setUpRoutes= (app)=>{
-    app.post("/api/signup",signUP);
-    app.get("/api/getStudents",findAll);
-    app.get("/api/getProfile",getProfile);
-    app.get("/api/checkFraud",checkFraud)
-    app.post("/api/login",logIn);
-    app.get("/api/logout",logOut);
-    app.get("/api/findUser",findUser);
-    app.post("/api/createClass",createClass)
-    app.get("/api/getTeacherClasses",getTeacherClasses)
-    app.get("/api/getStudentClasses",getStudentClasses)
-    app.delete("/api/deleteClass",deleteClass)
-    app.post("/api/joinClass",joinClass)
-    app.post("/api/joinClassTeacher",joinClassTeacher)
-    app.post("/api/leaveClass",leaveClass)
-    app.post("/api/addToClass",addToClass)
-    app.post("/api/absenceThreshold",setThreshold)
-    app.post("/api/createAttendance",createAttendance)
-    app.post("/api/modifyAttendanceField",modifyAttendanceField)
-    app.post("/api/recordAttendance",recordAttendance)
-    app.get("/api/checkDuplicateAttendance",checkDuplicateAttendance)
-    app.get("/api/getAttendance",getAttendance)
-    app.post("/api/createIndivAttendance",createIndivAttendance)
-    app.post("/api/editSubmittedExcuse",editSubmittedExcuse)
-    app.get("/api/displayAttendance",displayAttendance)
-    app.get("/api/displayStudentAttendance",displayStudentAttendance)
-    app.get("/api/getStudIds",getStudentIds)
-    app.get("/api/getTeacherAttendance",getTeacherAttendance)
-    app.post("/api/searchDisplay",searchDisplay)
-    app.get("/api/displayTRecords2",displayTRecords2)
-    app.post("/api/uploadExcuseLetter",upload.single('pdf'),uploadexcuseLetter)
-    app.get("/api/getExcuseLetters",getExcuseLetters)
-    app.post("/api/editStatus",editStatus)
-    app.post("/api/createNotification",createNotification)
-    app.get("/api/getNotifications",getNotifications)
-    app.get("/api/getStudentNotifs",getStudentNotifs)
-    app.get("/api/getClassExcuseLetters",getClassExcuseLetters)
-    app.get("/api/getPdfName",getPdfName)
-    app.get("/api/getAllIndivAttendances",getAllIndivAttendances)
-    app.get("/api/getAbsences",getAbsences)
-    app.get("/api/autoAbsent",autoAbsent)
-    app.get("/api/autoAbsentClass",autoAbsentClass)
-    app.get("/api/getName",getName)
-    app.get("/api/getTeacherName",getTeacherName)
-    app.get("/api/getClassThreshold",getClassThreshold)
-    app.get("/api/displayPeople",displayPeople)
-    app.get("/api/getStudentDetails",getSProfileDetails)
-    app.get("/api/getTeacherDetails",getTProfileDetails)
-    app.post("/api/editPhoneNum",editPhoneNum)
-    app.post("/api/editGuardianName",editGuardianName)
-    app.post("/api/editGuardianContact",editGuardianContact)
-}
-export default setUpRoutes;
+router.post("/api/signup",signUP);
+router.get("/api/getStudents",findAll);
+router.get("/api/getProfile",getProfile);
+router.get("/api/checkFraud",checkFraud)
+router.post("/api/login",logIn);
+router.get("/api/logout",logOut);
+router.get("/api/findUser",findUser);
+router.post("/api/createClass",createClass)
+router.get("/api/getTeacherClasses",getTeacherClasses)
+router.get("/api/getStudentClasses",getStudentClasses)
+router.delete("/api/deleteClass",deleteClass)
+router.post("/api/joinClass",joinClass)
+router.post("/api/joinClassTeacher",joinClassTeacher)
+router.post("/api/leaveClass",leaveClass)
+router.post("/api/addToClass",addToClass)
+router.post("/api/absenceThreshold",setThreshold)
+router.post("/api/createAttendance",createAttendance)
+router.post("/api/modifyAttendanceField",modifyAttendanceField)
+router.post("/api/recordAttendance",recordAttendance)
+router.get("/api/checkDuplicateAttendance",checkDuplicateAttendance)
+router.get("/api/getAttendance",getAttendance)
+router.post("/api/createIndivAttendance",createIndivAttendance)
+router.post("/api/editSubmittedExcuse",editSubmittedExcuse)
+router.get("/api/displayAttendance",displayAttendance)
+router.get("/api/displayStudentAttendance",displayStudentAttendance)
+router.get("/api/getStudIds",getStudentIds)
+router.get("/api/getTeacherAttendance",getTeacherAttendance)
+router.post("/api/searchDisplay",searchDisplay)
+router.get("/api/displayTRecords2",displayTRecords2)
+router.post("/api/uploadExcuseLetter",upload.single('pdf'),uploadexcuseLetter)
+router.get("/api/getExcuseLetters",getExcuseLetters)
+router.post("/api/editStatus",editStatus)
+router.post("/api/createNotification",createNotification)
+router.get("/api/getNotifications",getNotifications)
+router.get("/api/getStudentNotifs",getStudentNotifs)
+router.get("/api/getClassExcuseLetters",getClassExcuseLetters)
+router.get("/api/getPdfName",getPdfName)
+router.get("/api/getAllIndivAttendances",getAllIndivAttendances)
+router.get("/api/getAbsences",getAbsences)
+router.get("/api/autoAbsent",autoAbsent)
+router.get("/api/autoAbsentClass",autoAbsentClass)
+router.get("/api/getName",getName)
+router.get("/api/getTeacherName",getTeacherName)
+router.get("/api/getClassThreshold",getClassThreshold)
+router.get("/api/displayPeople",displayPeople)
+router.get("/api/getStudentDetails",getSProfileDetails)
+router.get("/api/getTeacherDetails",getTProfileDetails)
+router.post("/api/editPhoneNum",editPhoneNum)
+router.post("/api/editGuardianName",editGuardianName)
+router.post("/api/editGuardianContact",editGuardianContact)
+
+export default router;
