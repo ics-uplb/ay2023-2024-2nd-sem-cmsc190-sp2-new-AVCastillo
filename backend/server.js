@@ -30,13 +30,13 @@ const app = express()
 // };
 // app.use(cors(corsOptions));
 
-// app.use((req, res, next) => {
-//     res.setHeader("Access-Control-Allow-Origin", "https://uplbattedancetracker.vercel.app");
-//     res.setHeader("Access-Control-Allow-Methods", "POST, GET");
-//     res.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers,Access-Control-Allow-Methods,Origin,Accept,Content-Type, Authorization");
-//     res.setHeader("Access-Control-Allow-Credentials","true");
-//     next();
-//   });
+app.use((req, res, next) => {
+    res.setHeader("Access-Control-Allow-Origin", "https://uplbattedancetracker.vercel.app");
+    res.setHeader("Access-Control-Allow-Methods", "POST, GET");
+    res.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers,Access-Control-Allow-Methods,Origin,Accept,Content-Type, Authorization");
+    res.setHeader("Access-Control-Allow-Credentials","true");
+    next();
+  });
 
 
 
