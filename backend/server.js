@@ -22,13 +22,13 @@ const app = express()
 // // allow CORS
 
 
-// const corsOptions = {
-//     origin: ["https://uplbattedancetracker.vercel.app","https://uplbattedancetracker.vercel.app/","https://uplbattedancetracker.vercel.app//"],
-//     credentials: true,
-//     methods: ['GET', 'POST', 'OPTIONS'],
-//     allowedHeaders: ['Content-Type', 'Authorization']
-// };
-// app.use(cors(corsOptions));
+const corsOptions = {
+    origin: ["https://uplbattedancetracker.vercel.app","https://uplbattedancetracker.vercel.app/","https://uplbattedancetracker.vercel.app//"],
+    credentials: true,
+    methods: ['GET', 'POST', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+};
+app.use(cors(corsOptions));
 
 app.use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Origin", "https://uplbattedancetracker.vercel.app");

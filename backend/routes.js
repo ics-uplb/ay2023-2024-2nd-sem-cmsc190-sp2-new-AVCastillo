@@ -11,14 +11,14 @@ import express from 'express'
 import cors from 'cors'
 
 const router=express.Router()
-router.use(
-    cors({
-        origin:"https://uplbattedancetracker.vercel.app", //vercel url
-        // origin:"http://localhost:3000",
-        credentials:true,
-        methods:["GET","POST"]
-    })
-)
+// router.use(
+//     cors({
+//         origin:"https://uplbattedancetracker.vercel.app", //vercel url
+//         // origin:"http://localhost:3000",
+//         credentials:true,
+//         methods:["GET","POST"]
+//     })
+// )
 
 
 const upload = multer({ dest: 'uploads/' });
