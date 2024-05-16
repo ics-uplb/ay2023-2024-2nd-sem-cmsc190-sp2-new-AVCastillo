@@ -32,10 +32,11 @@ app.use((req, res, next) => {
   });
 
 const corsOptions = {
-    origin: ["https://uplbattedancetracker.vercel.app","https://uplbattedancetracker.vercel.app/","https://uplbattedancetracker.vercel.app//"],
+    // origin: ["https://uplbattedancetracker.vercel.app","https://uplbattedancetracker.vercel.app/","https://uplbattedancetracker.vercel.app//"],
+    origin:"*",
     credentials: true,
-    // methods: ['GET', 'POST', 'OPTIONS'],
-    // allowedHeaders: ['Content-Type', 'Authorization']
+    methods: ['GET', 'POST', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
 };
 app.use(cors(corsOptions));
 
@@ -52,6 +53,7 @@ app.use(cors(corsOptions));
 //   }));
 
 
+app.use('/',router)
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }));
@@ -62,14 +64,13 @@ app.use((req,res,next)=>{
 })
 
 
-
+        
 
 const connectToMongo= async ()=>{
     try{
         await mongoose.connect(process.env.MONGO_URI)
         console.log("Connected!")
-        app.use('/',router)
-        
+       
 
         app.listen(process.env.PORT,()=>{
             console.log("Listening on port")

@@ -119,7 +119,8 @@ const Login= ()=>{
         }else{
             try{
                 await axios.post(`${process.env.REACT_APP_API_SERVER}/api/login`,creds,{
-                  withCredentials: true
+                  withCredentials: true,
+                  headers:{"Access-Control-Allow-Origin":"*"}
                  }).then(res =>{
                     setResponse(res)
                 })
