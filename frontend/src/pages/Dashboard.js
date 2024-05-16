@@ -106,7 +106,8 @@ const Dashboard = ()=>{
     useEffect(()=>{
         setRefresh(false)
         async function getStudClasses(){
-            const user= await  axios.get('/api/getProfile');
+            const user= await  axios.get(`${process.env.REACT_APP_API_SERVER}/api/getProfile`);
+            console.log(user)
 
             if(user.data===""){
                 navigate("/")

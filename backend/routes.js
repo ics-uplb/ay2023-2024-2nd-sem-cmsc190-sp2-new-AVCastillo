@@ -14,6 +14,7 @@ const router=express.Router()
 router.use(
     cors({
         origin:"https://uplbattedancetracker.vercel.app", //vercel url
+        // origin:"http://localhost:3000",
         credentials:true,
         methods:["GET","POST"]
     })
