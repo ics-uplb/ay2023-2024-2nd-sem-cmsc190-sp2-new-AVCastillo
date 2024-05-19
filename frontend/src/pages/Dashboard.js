@@ -106,8 +106,8 @@ const Dashboard = ()=>{
     useEffect(()=>{
         setRefresh(false)
         async function getStudClasses(){
-            const user= await  axios.get(`${process.env.REACT_APP_API_SERVER}/api/getProfile`,{method:"GET",
-                credentials:"include"
+            const user= await  axios.get(`${process.env.REACT_APP_API_SERVER}/api/getProfile`,{
+                withCredentials: true
             });
             console.log(user)
 
