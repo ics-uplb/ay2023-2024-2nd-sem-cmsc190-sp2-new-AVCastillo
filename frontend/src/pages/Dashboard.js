@@ -187,7 +187,7 @@ const Dashboard = ()=>{
         if(!classnameError && !sectionError && !codeError){
            
             try{
-                await axios.post(`/api/createClass`,{className,section,classCode,teacherId,teacherName},{withCredentials:true}).then(res =>{
+                await axios.post(`/api/createClass`,{className,section,classCode,teacherId,teacherName},{method:"POST",withCredentials:true}).then(res =>{
         
                 })
                 
