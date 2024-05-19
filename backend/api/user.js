@@ -88,7 +88,9 @@ const logIn= async (req,res)=>{
 
 const getProfile= async(req,res)=>{
     try{
+        console.log(req.cookies)
         const token=  await req.cookies.token
+        console.log(token)
         if(token){
         jwt.verify(token, process.env.JWT_SECRET,{},(err,user)=>{
                 if(err){
