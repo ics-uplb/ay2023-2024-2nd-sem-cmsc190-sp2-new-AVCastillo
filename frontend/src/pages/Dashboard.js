@@ -152,7 +152,7 @@ const Dashboard = ()=>{
       };
 
     const getUser=()=>{
-        axios.get(`/api/findUser?id=${user.id}`,{withCredentials:true}).then(({data})=>{
+        axios.get(`/api/findUser?id=${userData.id}`,{withCredentials:true}).then(({data})=>{
         setUserData(data)
        })
     }
@@ -172,7 +172,7 @@ const Dashboard = ()=>{
         e.preventDefault()
 
         
-        await axios.post(`/api/joinClass`,{code:enterClassCode, studentId:user.data.id},{withCredentials:true}).then(res =>{
+        await axios.post(`/api/joinClass`,{code:enterClassCode, studentId:userData.id},{withCredentials:true}).then(res =>{
 
         })
         closeJoinD()
@@ -182,8 +182,8 @@ const Dashboard = ()=>{
     }
     const handleSubmit=async (e)=>{
         e.preventDefault()
-        const teacherId=user.data.id
-        const teacherName=`${user.data.firstName} ${user.data.lastName}`
+        const teacherId=userData.id
+        const teacherName=`${userData.firstName} ${userData.lastName}`
         if(!classnameError && !sectionError && !codeError){
            
             try{
