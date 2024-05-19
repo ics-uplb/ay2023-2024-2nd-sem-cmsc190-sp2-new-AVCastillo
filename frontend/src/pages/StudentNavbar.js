@@ -66,7 +66,7 @@ const StudentNavbar=()=>{
         navigate('/dashboard')
       }else if(index===1){
         dispatch({type:"SET_CLASSES", payload: null})
-        axios.get('/api/logout').then((response)=>{
+        axios.get('/api/logout',{withCredentials:true}).then((response)=>{
         })
         navigate("/")
       }

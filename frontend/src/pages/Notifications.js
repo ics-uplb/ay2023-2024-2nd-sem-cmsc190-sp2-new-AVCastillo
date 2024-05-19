@@ -56,14 +56,14 @@ const Notifications= ()=>{
     useEffect(()=>{
 
         async function getUsers(){
-            const user= await axios.get("/api/getProfile")
+            const user= await axios.get("/api/getProfile",{withCredentials:true})
             setRole(user.data.role)
             if(user.data.role==="Teacher"){
-                const notifs= await axios.get(`/api/getNotifications?classId=${classId}`)
+                const notifs= await axios.get(`/api/getNotifications?classId=${classId}`,{withCredentials:true})
                 setTeacherNotifs(notifs.data)
                 
             }else{
-                const notifs= await axios.get(`/api/getStudentNotifs?classId=${classId}&studentId=${user.data.id}`)
+                const notifs= await axios.get(`/api/getStudentNotifs?classId=${classId}&studentId=${user.data.id}`,{withCredentials:true})
                 setStudentNotifs(notifs.data)
             }
         }

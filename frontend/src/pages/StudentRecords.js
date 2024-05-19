@@ -93,11 +93,11 @@ const StudentRecord=()=>{
 
     useEffect(()=>{
         async function getUser(){
-            const user=await axios.get('/api/getProfile');
+            const user=await axios.get('/api/getProfile',{withCredentials:true});
             setUserId(user.data.id)
 
-            const absent=await axios.get(`/api/autoAbsent?classId=${classId}&studentId=${user.data.id}`)
-            const record= await axios.get(`/api/displayStudentAttendance?classId=${classId}&studentId=${user.data.id}`)
+            const absent=await axios.get(`/api/autoAbsent?classId=${classId}&studentId=${user.data.id}`,{withCredentials:true})
+            const record= await axios.get(`/api/displayStudentAttendance?classId=${classId}&studentId=${user.data.id}`,{withCredentials:true})
             const gridRecord=record.data
             setRecords(record)
             // dispatchUser({type:'SET_USER',payload:user})
@@ -118,10 +118,10 @@ const StudentRecord=()=>{
             });
             setRows(gridRecord)
 
-            const threshold= await axios.get(`/api/getClassThreshold?classId=${classId}`)
+            const threshold= await axios.get(`/api/getClassThreshold?classId=${classId}`,{withCredentials:true})
             
 
-            const absences= await axios.get(`/api/getAbsences?classId=${classId}&studentId=${user.data.id}`)
+            const absences= await axios.get(`/api/getAbsences?classId=${classId}&studentId=${user.data.id}`,{withCredentials:true})
             let absence=0
             let excuses=0
             let pending=0
@@ -183,8 +183,9 @@ const StudentRecord=()=>{
           });
          
           
-          await axios.post("/api/createNotification",{classId:classId, senderName:handleUpName,senderId:userId, sendTo:'',roleOfReceiver:"Teacher", type:"Excuse",notifString:`${handleUpName} sent an excuse letter for ${handleUpDate} class`,dateSubmitted:dateSubmitted})
-          await axios.post("/api/editSubmittedExcuse",{indivAttendanceId:handleUpIndivId, submitted:true})
+          await axios.post("/api/createNotification",{classId:classId, senderName:handleUpName,senderId:userId, sendTo:'',roleOfReceiver:"Teacher", type:"Excuse"
+          ,notifString:`${handleUpName} sent an excuse letter for ${handleUpDate} class`,dateSubmitted:dateSubmitted},{withCredentials:true})
+          await axios.post("/api/editSubmittedExcuse",{indivAttendanceId:handleUpIndivId, submitted:true},{withCredentials:true})
 
           for(const rec of rows){
             if (rec.id===paramsIndex){

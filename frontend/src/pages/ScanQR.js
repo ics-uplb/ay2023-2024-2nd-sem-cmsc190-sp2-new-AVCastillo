@@ -28,7 +28,7 @@ const ScanQR=()=>{
     const reverseGeocodeOSM = async (lat, lng) => {
         try {
           const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`;
-          const response = await axios.get(url);
+          const response = await axios.get(url,{withCredentials:true});
           setAddress(response.data.display_name)
         
         //   setAddress(response.data.display_name)
@@ -63,7 +63,7 @@ const ScanQR=()=>{
     useEffect(()=>{
 
         async function getUser(){
-            const student = await axios.get('/api/getProfile');
+            const student = await axios.get('/api/getProfile',{withCredentials:true});
             dispatchUser({type:'SET_USER',payload:student})
 
         }
@@ -126,7 +126,7 @@ const ScanQR=()=>{
 
       
     const compareTime= async (result)=>{
-        const attendance= await axios.get(`/api/getAttendance?attendanceId=${result}`)
+        const attendance= await axios.get(`/api/getAttendance?attendanceId=${result}`,{withCredentials:true})
 
         if(attendance.data!==null){
             const now=new Date()
@@ -149,10 +149,10 @@ const ScanQR=()=>{
                 }
                 
                 
-                const duplicate=await axios.get(`/api/checkDuplicateAttendance?studentId=${user.data.id}&attendanceCollectionId=${attendance.data._id}`)
+                const duplicate=await axios.get(`/api/checkDuplicateAttendance?studentId=${user.data.id}&attendanceCollectionId=${attendance.data._id}`,{withCredentials:true})
 
                 if(duplicate.data===null){
-                    const record=await axios.post(`/api/recordAttendance`,body)
+                    const record=await axios.post(`/api/recordAttendance`,body,{withCredentials:true})
                 }else{
                     console.log("You already recorded your attendance")
                 }

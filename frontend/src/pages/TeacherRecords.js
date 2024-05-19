@@ -97,11 +97,11 @@ const TeacherRecord=()=>{
 
     useEffect(()=>{
         async function getUser(){
-            const user=await axios.get('/api/getProfile');
+            const user=await axios.get('/api/getProfile',{withCredentials:true});
             setUserId(user.data.id)
             setUserName(user.data.firstName + " " + user.data.lastName)
-            const absent=await axios.get(`/api/autoAbsentClass?classId=${classId}`)
-            const dates=await axios.get(`/api/getTeacherAttendance?classId=${classId}`)
+            const absent=await axios.get(`/api/autoAbsentClass?classId=${classId}`,{withCredentials:true})
+            const dates=await axios.get(`/api/getTeacherAttendance?classId=${classId}`,{withCredentials:true})
             setOptions(dates.data.dates)
             
         }
@@ -121,10 +121,11 @@ const TeacherRecord=()=>{
     const confirmChangeStatus= async()=>{
       
         (parameters.row)["status"]=newStatus
-        const edited= await axios.post("/api/editStatus",{indivId:parameters.row.studentId, attendanceCollectionId:parameters.row.attendanceCollectionId, updatedStatus:newStatus})
+        const edited= await axios.post("/api/editStatus",{indivId:parameters.row.studentId, attendanceCollectionId:parameters.row.attendanceCollectionId, updatedStatus:newStatus},{withCredentials:true})
         const dateNow= new Date()
         const dateSubmitted= dateNow.toLocaleDateString('en-US', { weekday: 'short',year: 'numeric', month: 'short', day: 'numeric',hour:'numeric',minute:'numeric' })
-        await axios.post("/api/createNotification",{classId:classId, senderName:userName, senderId:userId ,sendTo:parameters.row.studentId,roleOfReceiver:"Student", type:"Attendance",notifString:`${userName} changed your attendance for ${parameters.row.convertedDate} to ${newStatus}`,dateSubmitted:dateSubmitted})
+        await axios.post("/api/createNotification",{classId:classId, senderName:userName, senderId:userId ,sendTo:parameters.row.studentId,roleOfReceiver:"Student",
+         type:"Attendance",notifString:`${userName} changed your attendance for ${parameters.row.convertedDate} to ${newStatus}`,dateSubmitted:dateSubmitted},{withCredentials:true})
     
     }
     const closeDetails=()=>{
@@ -227,7 +228,7 @@ const TeacherRecord=()=>{
 
       const search= async()=>{
 
-        const attendance= await axios.post('/api/searchDisplay',{classId:classId,searchDate:searchHolder})
+        const attendance= await axios.post('/api/searchDisplay',{classId:classId,searchDate:searchHolder},{withCredentials:true})
         const gridRecord=attendance.data
 
 
@@ -251,7 +252,7 @@ const TeacherRecord=()=>{
         try {
           const response = await axios.get(`/api/getExcuseLetters?indivAttendanceId=${indivAttendanceId}`, {
               responseType: 'blob'  // This is crucial to handle the PDF file correctly
-          });
+          },{withCredentials:true});
           const pdfBlob = response.data;
           const pdfUrl = URL.createObjectURL(pdfBlob);
           

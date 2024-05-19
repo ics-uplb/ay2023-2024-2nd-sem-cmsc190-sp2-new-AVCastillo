@@ -243,7 +243,7 @@ const Signup = ()=>{
 
     
             try{
-                await axios.post(`/api/signup`,newuser).then(res =>{
+                await axios.post(`/api/signup`,newuser,{withCredentials:true}).then(res =>{
         
                 })
                 setFname('')

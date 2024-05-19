@@ -152,12 +152,12 @@ const Dashboard = ()=>{
       };
 
     const getUser=()=>{
-        axios.get('/api/findUser?id='+user.id).then(({data})=>{
+        axios.get(`/api/findUser?id=${user.id}`,{withCredentials:true}).then(({data})=>{
         setUserData(data)
        })
     }
     const logout = ()=>{
-        axios.get('/api/logout').then((response)=>{
+        axios.get('/api/logout',{withCredentials:true}).then((response)=>{
         })
         navigate('/')
          
@@ -172,7 +172,7 @@ const Dashboard = ()=>{
         e.preventDefault()
 
         
-        await axios.post(`/api/joinClass`,{code:enterClassCode, studentId:user.data.id}).then(res =>{
+        await axios.post(`/api/joinClass`,{code:enterClassCode, studentId:user.data.id},{withCredentials:true}).then(res =>{
 
         })
         closeJoinD()
@@ -187,7 +187,7 @@ const Dashboard = ()=>{
         if(!classnameError && !sectionError && !codeError){
            
             try{
-                await axios.post(`/api/createClass`,{className,section,classCode,teacherId,teacherName}).then(res =>{
+                await axios.post(`/api/createClass`,{className,section,classCode,teacherId,teacherName},{withCredentials:true}).then(res =>{
         
                 })
                 

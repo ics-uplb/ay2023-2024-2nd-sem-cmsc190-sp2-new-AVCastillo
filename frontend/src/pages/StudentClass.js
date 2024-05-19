@@ -73,23 +73,24 @@ const StudentClass =(props)=>{
     
     useEffect(()=>{
         async function detectFrauds(){
-            const user= await  axios.get('/api/getProfile');
+            const user= await  axios.get('/api/getProfile',{withCredentials:true});
             setUser(user.data)
 
             if(user.data===""){
                 navigate("/")
             }
-            const fraud= await  axios.get(`/api/checkFraud?studentId=${user.data.id}`);
+            const fraud= await  axios.get(`/api/checkFraud?studentId=${user.data.id}`,{withCredentials:true});
            
             if(fraud.data.fraud===true){
                 //send notifications
                 const dateNow= new Date()
                 const dateSubmitted= dateNow.toLocaleDateString('en-US', { weekday: 'short',year: 'numeric', month: 'short', day: 'numeric',hour:'numeric',minute:'numeric' })
                 for(const person of fraud.data.peopleInvolved){
-                    const name=await axios.get(`/api/getName?studentId=${person}`)
-                    await axios.post("/api/createNotification",{classId:classId, senderName:'',senderId:'', sendTo:person,roleOfReceiver:"Student", type:"Fraud",notifString:"FRAUD: You logged in from a different device",dateSubmitted:dateSubmitted})
+                    const name=await axios.get(`/api/getName?studentId=${person}`,{withCredentials:true})
+                    await axios.post("/api/createNotification",{classId:classId, senderName:'',senderId:'', sendTo:person,roleOfReceiver:"Student", 
+                    type:"Fraud",notifString:"FRAUD: You logged in from a different device",dateSubmitted:dateSubmitted},{withCredentials:true})
                     await axios.post("/api/createNotification",{classId:classId, senderName:'',senderId:'', sendTo:'',roleOfReceiver:"Teacher", type:"Fraud",notifString:`FRAUD: 
-                    ${name.data.name} logged in from a different device`,dateSubmitted:dateSubmitted})
+                    ${name.data.name} logged in from a different device`,dateSubmitted:dateSubmitted},{withCredentials:true})
                 }
 
                 //clear fraud cookies

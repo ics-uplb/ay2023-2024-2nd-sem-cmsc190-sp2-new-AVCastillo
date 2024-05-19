@@ -137,7 +137,7 @@ const Navbar=()=>{
         navigate("/viewClass")
       }else{
         dispatch({type:"SET_CLASSES", payload:null})
-        axios.get('/api/logout').then((response)=>{
+        axios.get('/api/logout',{withCredentials:true}).then((response)=>{
         })
         navigate("/")
       }
@@ -197,7 +197,7 @@ const Navbar=()=>{
     const addToClasss= async(e)=>{
       e.preventDefault()
       if(studentEmail){
-        const add=await axios.post("/api/addToClass",{classId:classId, email:studentEmail})
+        const add=await axios.post("/api/addToClass",{classId:classId, email:studentEmail},{withCredentials:true})
 
         if(add.data.error){
           setSnackbarLabel(add.data.error)

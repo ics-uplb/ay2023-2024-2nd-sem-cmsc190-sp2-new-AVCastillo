@@ -40,8 +40,8 @@ const TeacherRecord2=()=>{
 
     useEffect(()=>{
         async function getUser(){
-            const user=await axios.get('/api/getProfile');
-            const attendance=await axios.get(`/api/displayTRecords2?classId=${classId}`)
+            const user=await axios.get('/api/getProfile',{withCredentials:true});
+            const attendance=await axios.get(`/api/displayTRecords2?classId=${classId}`,{withCredentials:true})
             setClassName(attendance.data.className)
             setSection(attendance.data.section)
 

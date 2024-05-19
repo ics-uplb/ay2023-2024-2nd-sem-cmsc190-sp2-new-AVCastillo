@@ -104,14 +104,14 @@ const ClassSettings=()=>{
 
     useEffect(()=>{
         async function getUser(){
-            const user= await axios.get("/api/getProfile")
+            const user= await axios.get("/api/getProfile",{withCredentials:true})
             setUser(user.data)
             if(user.data===""){
                 navigate("/")
             }
             setRole(user.data.role)
 
-            const peeps=await axios.get(`/api/displayPeople?classId=${classId}`)
+            const peeps=await axios.get(`/api/displayPeople?classId=${classId}`,{withCredentials:true})
             setPeople(peeps.data.people)
         }
         getUser()
@@ -134,7 +134,7 @@ const ClassSettings=()=>{
 
     const submitThreshold= async()=>{
         if(threshold){
-            const data= await axios.post("/api/absenceThreshold",{classId:classId, threshold:threshold})
+            const data= await axios.post("/api/absenceThreshold",{classId:classId, threshold:threshold},{withCredentials:true})
         }
        
         

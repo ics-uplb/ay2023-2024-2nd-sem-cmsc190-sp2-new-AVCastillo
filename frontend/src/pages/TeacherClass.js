@@ -81,7 +81,7 @@ const TeacherClass =(props)=>{
         
 
         async function getUser(){
-            const user = await axios.get('/api/getProfile');
+            const user = await axios.get('/api/getProfile',{withCredentials:true});
 
             setUser(user.data)
     
