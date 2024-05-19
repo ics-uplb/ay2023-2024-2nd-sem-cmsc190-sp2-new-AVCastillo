@@ -120,7 +120,7 @@ const Login= ()=>{
             try{
                 await axios.post(`${process.env.REACT_APP_API_SERVER}/api/login`,creds,{
                   withCredentials: true,
-                  headers:{"Access-Control-Allow-Origin":"*"}
+                  headers:{"Access-Control-Allow-Origin":"https://castillo-sp2.vercel.app"}
                  }).then(res =>{
                     setResponse(res)
                 })
