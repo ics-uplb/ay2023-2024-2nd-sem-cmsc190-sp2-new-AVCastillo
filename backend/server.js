@@ -53,7 +53,7 @@ app.use(cors(corsOptions));
 //   }));
 
 // app.options('*',cors())
-app.use('/',router)
+
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }));
@@ -62,6 +62,8 @@ app.use((req,res,next)=>{
     console.log(req.path,req.method)
     next()
 })
+
+app.use('/',router)
 
 
         
