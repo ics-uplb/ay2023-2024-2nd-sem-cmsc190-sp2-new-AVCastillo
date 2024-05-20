@@ -153,9 +153,10 @@ const ScanQR=()=>{
                 
                 
                 const duplicate=await axios.get(`${process.env.REACT_APP_API_SERVER}/api/checkDuplicateAttendance?studentId=${user.data.id}&attendanceCollectionId=${attendance.data._id}`,{withCredentials:true})
-
+                console.log(duplicate)
                 if(duplicate.data===null){
                     const record=await axios.post(`${process.env.REACT_APP_API_SERVER}/api/recordAttendance`,body,{withCredentials:true})
+                    console.log(record)
                 }else{
                     console.log("You already recorded your attendance")
                 }
