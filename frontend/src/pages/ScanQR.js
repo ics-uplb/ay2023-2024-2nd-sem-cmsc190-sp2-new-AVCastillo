@@ -136,6 +136,8 @@ const ScanQR=()=>{
             const startTemp= new Date(attendance.data.startSched)
             const late= new Date(startTemp.setMinutes(startTemp.getMinutes()+15))
 
+            console.log(now,end)
+
             if(now<start){
 
                 alert("Class hasn't started yet")
