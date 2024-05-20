@@ -25,12 +25,14 @@ const signUP= async (req,res)=>{
     //pwede rin gamitin yung student number
     const existingEmail= await user.findOne({email:newuser.email})
     if(existingEmail){
-        return res.status(400).json({error:"email already exist!"})  //temporary solution
+        return res.status(400).json({error:"Email already exist!"})  //temporary solution
     }
 
-    const existingStudentNum= await user.findOne({studentNum:newuser.studentNum})
-    if(existingStudentNum){
-        return res.status(400).json({error:"Student number already exist!"})  //temporary solution
+    if (newuser.role==="Student"){
+        const existingStudentNum= await user.findOne({studentNum:newuser.studentNum})
+        if(existingStudentNum){
+            return res.status(400).json({error:"Student number already exist!"})  //temporary solution
+        }
     }
 
 
@@ -54,7 +56,7 @@ const logIn= async (req,res)=>{
         console.log("pasok2")
         exist.comparePassword(password, (err,isMatch)=>{
             if(err || !isMatch){
-                res.status(400).json({error:"WRONG_PASSWORD"})
+                res.status(400).json({error:"Wrong password!"})
             }else{ //match
                 const token=jwt.sign({email: exist.email, id: exist._id, role:exist.role, firstName:exist.firstName, lastName:exist.lastName},process.env.JWT_SECRET)
                 let users= req.cookies.loggedInUsers
@@ -79,7 +81,7 @@ const logIn= async (req,res)=>{
         })
 
     }else{
-        res.status(400).json({error:"EMAIL_NOT_REGISTERED"})
+        res.status(400).json({error:"Email not registered!"})
     }
 
    
