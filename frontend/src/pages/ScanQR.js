@@ -112,11 +112,13 @@ const ScanQR=()=>{
                     compareTime(result)
                     // compareTime(result)
                     // setScannedResult(result)
+                    alert(result)
                     
                 }
 
                 const error=(error)=>{
                     console.log(error)
+                    alert(error)
                 }  
             
                 // Start scanning
