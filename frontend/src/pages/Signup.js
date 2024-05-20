@@ -223,65 +223,70 @@ const Signup = ()=>{
     const submit =async(e)=>{
         e.preventDefault()
         let newuser={firstName,lastName,studentNum,role,sex,email,password}
-        if(role==="Teacher"){ 
-           if((firstName.length > 0 &&lastName.length > 0 &&role.length > 0 &&sex.length > 0 &&email.length > 0 &&password.length)>0){
-                newuser= {firstName,lastName,studentNum:"",role,sex,email,password}
-                try{
-                    await axios.post(`${process.env.REACT_APP_API_SERVER}/api/signup`,newuser,{withCredentials:true}).then(res =>{})
-                    setFname('')
-                    setLname('')
-                    setStudnum('')
-                    setRole('')
-                    setSex('')
-                    setEmail('')
-                    setPassword('')
-                    setDisableStudnum(false)
-                    setSnackbarLabel('New Student Added')
-                    setSuccess("success")
-                    setOpenSnack(true)
-    
-    
-                    
-                }catch(e){
-                    setSnackbarLabel(e.response.data.error)
+            if(role==="Teacher"){ 
+                if((firstName.length > 0 &&lastName.length > 0 &&role.length > 0 &&sex.length > 0 &&email.length > 0 &&password.length)>0){
+                    newuser= {firstName,lastName,studentNum:"",role,sex,email,password}
+                    try{
+                        await axios.post(`${process.env.REACT_APP_API_SERVER}/api/signup`,newuser,{withCredentials:true}).then(res =>{})
+                        setFname('')
+                        setLname('')
+                        setStudnum('')
+                        setRole('')
+                        setSex('')
+                        setEmail('')
+                        setPassword('')
+                        setDisableStudnum(false)
+                        setSnackbarLabel('New Student Added')
+                        setSuccess("success")
+                        setOpenSnack(true)
+        
+        
+                        
+                    }catch(e){
+                        setSnackbarLabel(e.response.data.error)
+                        setSuccess("error")
+                        setOpenSnack(true)
+                    }
+                }else{
+                    setSnackbarLabel("Fill out all fields!")
                     setSuccess("error")
                     setOpenSnack(true)
                 }
-           }else{
-            setSnackbarLabel("Fill out all fields!")
-            setSuccess("error")
-            setOpenSnack(true)
-           }
-        }else if(role==='Student'){
-            if((firstName.length > 0 &&lastName.length > 0 &&studentNum.length > 0 &&role.length > 0 &&sex.length > 0 &&email.length > 0 &&password.length)>0){
-                newuser= {firstName,lastName,studentNum,role,sex,email,password}
-                try{
-                    await axios.post(`${process.env.REACT_APP_API_SERVER}/api/signup`,newuser,{withCredentials:true}).then(res =>{})
-                    setFname('')
-                    setLname('')
-                    setStudnum('')
-                    setRole('')
-                    setSex('')
-                    setEmail('')
-                    setPassword('')
-                    setDisableStudnum(false)
-                    setSnackbarLabel('New Student Added')
-                    setSuccess("success")
-                    setOpenSnack(true)
-    
-    
-                    
-                }catch(e){
-                    setSnackbarLabel(e.response.data.error)
+            }else if(role==='Student'){
+                if((firstName.length > 0 &&lastName.length > 0 &&studentNum.length > 0 &&role.length > 0 &&sex.length > 0 &&email.length > 0 &&password.length)>0){
+                    newuser= {firstName,lastName,studentNum,role,sex,email,password}
+                    try{
+                        await axios.post(`${process.env.REACT_APP_API_SERVER}/api/signup`,newuser,{withCredentials:true}).then(res =>{})
+                        setFname('')
+                        setLname('')
+                        setStudnum('')
+                        setRole('')
+                        setSex('')
+                        setEmail('')
+                        setPassword('')
+                        setDisableStudnum(false)
+                        setSnackbarLabel('New Student Added')
+                        setSuccess("success")
+                        setOpenSnack(true)
+        
+        
+                        
+                    }catch(e){
+                        setSnackbarLabel(e.response.data.error)
+                        setSuccess("error")
+                        setOpenSnack(true)
+                    }
+                }else{
+                    setSnackbarLabel("Fill out all fields!")
                     setSuccess("error")
                     setOpenSnack(true)
                 }
             }else{
-                setSnackbarLabel("Fill out all fields!")
+                setSnackbarLabel("Enter a role first!")
                 setSuccess("error")
                 setOpenSnack(true)
-            }
-        }   
+
+            }   
 
     
             
