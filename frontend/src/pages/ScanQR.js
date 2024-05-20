@@ -128,7 +128,7 @@ const ScanQR=()=>{
       
     const compareTime= async (result)=>{
         const attendance= await axios.get(`${process.env.REACT_APP_API_SERVER}/api/getAttendance?attendanceId=${result}`,{withCredentials:true})
-
+        console.log(result)
         if(attendance.data!==null){
             const now=new Date()
             const end= new Date(attendance.data.endSched)
