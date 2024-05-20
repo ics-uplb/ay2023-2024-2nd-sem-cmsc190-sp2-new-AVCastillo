@@ -250,7 +250,7 @@ const TeacherRecord=()=>{
       const handleOpenPDF = async (indivAttendanceId) => {
 
         try {
-          const response = await axios.get(`/api/getExcuseLetters?indivAttendanceId=${indivAttendanceId}`, {
+          const response = await axios.get(`${process.env.REACT_APP_API_SERVER}/api/getExcuseLetters?indivAttendanceId=${indivAttendanceId}`, {
               responseType: 'blob'  // This is crucial to handle the PDF file correctly
           },{withCredentials:true});
           const pdfBlob = response.data;
