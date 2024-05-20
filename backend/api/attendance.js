@@ -42,8 +42,9 @@ const getAttendance = async(req,res)=>{//container
 const recordAttendance=async(req,res)=>{
     
     try{
-        
+        console.log(req.body.attendanceCollectionId,req.body.studentId)
         const update= await indivAttendanceModel.findOneAndUpdate({attendanceCollectionId:req.body.attendanceCollectionId, studentId:req.body.studentId },{status:req.body.status, date: req.body.date, location:req.body.location},{new:true})
+        console.log(update)
         
         res.status(200).json(update)
             
