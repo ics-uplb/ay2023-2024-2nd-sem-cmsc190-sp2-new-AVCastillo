@@ -39,6 +39,7 @@ const signUP= async (req,res)=>{
 
     try{
         newuser.save();
+        delete newuser.password
         res.status(200).json(newuser)
     }catch(error){
         res.status(400).json({error:error.message})
