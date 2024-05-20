@@ -65,9 +65,17 @@ const logIn= async (req,res)=>{
                 if(exist.role==='Student'){
                     if(users){
                         users.push(exist._id)
-                        res.cookie("loggedInUsers",users)
+                        res.cookie("loggedInUsers",users,{
+                            httpOnly:true,
+                            secure:true,
+                            sameSite:"None",
+                            maxAge:3600000})
                     }else{
-                        res.cookie("loggedInUsers",[exist._id])
+                        res.cookie("loggedInUsers",[exist._id],{
+                            httpOnly:true,
+                            secure:true,
+                            sameSite:"None",
+                            maxAge:3600000})
                     }
                 }
                 res.cookie("token",token,{
@@ -157,7 +165,11 @@ const checkFraud= async(req,res)=>{
 }
 
 const logOut = async(req,res)=>{
-    res.cookie('token','',{maxAge:1}).json({message:"Logged out"})
+    res.cookie('token','',{
+        httpOnly:true,
+        secure:true,
+        sameSite:"None",
+        maxAge:3600000}).json({message:"Logged out"})
 }
 
 const findUser= async(req,res)=>{

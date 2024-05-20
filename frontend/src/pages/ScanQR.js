@@ -112,7 +112,7 @@ const ScanQR=()=>{
                     compareTime(result)
                     // compareTime(result)
                     // setScannedResult(result)
-                    alert(result)
+                    // alert(result)
                     
                 }
 
@@ -158,7 +158,8 @@ const ScanQR=()=>{
                 console.log(duplicate)
                 if(duplicate.data===null){
                     const record=await axios.post(`${process.env.REACT_APP_API_SERVER}/api/recordAttendance`,body,{withCredentials:true})
-                    alert(record.data)
+                    // alert(record.data)
+                    alert("Successfully recorded attendance")
                 }else{
                     alert("You already recorded your attendance")
                 }
