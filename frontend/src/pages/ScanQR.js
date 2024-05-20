@@ -48,7 +48,7 @@ const ScanQR=()=>{
                 lng: location.coords.longitude,
             },
         });
-        reverseGeocodeOSM(location.coords.latitude,location.coords.longitude)
+        console.log(reverseGeocodeOSM(location.coords.latitude,location.coords.longitude))
 
     };
 
@@ -57,6 +57,7 @@ const ScanQR=()=>{
             loaded: true,
             error,
         });
+        console.log(error)
     };
 
 
