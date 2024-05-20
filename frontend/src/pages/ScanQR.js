@@ -118,7 +118,7 @@ const ScanQR=()=>{
 
                 const error=(error)=>{
                     console.log(error)
-                    alert(error)
+                    // alert(error)
                 }  
             
                 // Start scanning
