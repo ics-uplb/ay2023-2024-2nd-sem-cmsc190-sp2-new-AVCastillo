@@ -69,13 +69,13 @@ const logIn= async (req,res)=>{
                             httpOnly:true,
                             secure:true,
                             sameSite:"None",
-                            maxAge:3600000})
+                            })
                     }else{
                         res.cookie("loggedInUsers",[exist._id],{
                             httpOnly:true,
                             secure:true,
                             sameSite:"None",
-                            maxAge:3600000})
+                            })
                     }
                 }
                 res.cookie("token",token,{
@@ -169,7 +169,7 @@ const logOut = async(req,res)=>{
         httpOnly:true,
         secure:true,
         sameSite:"None",
-        maxAge:3600000}).json({message:"Logged out"})
+        maxAge:1}).json({message:"Logged out"})
 }
 
 const findUser= async(req,res)=>{
