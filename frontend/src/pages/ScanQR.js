@@ -48,7 +48,7 @@ const ScanQR=()=>{
                 lng: location.coords.longitude,
             },
         });
-        console.log(reverseGeocodeOSM(location.coords.latitude,location.coords.longitude))
+        // console.log(reverseGeocodeOSM(location.coords.latitude,location.coords.longitude))
 
     };
 
@@ -142,11 +142,11 @@ const ScanQR=()=>{
             }else{
                 let body={}
                 if(now>end){
-                    body={attendanceCollectionId:attendance.data._id,studentId:user.data.id,status:"Absent", date:now.toString(),location:address}
+                    body={attendanceCollectionId:attendance.data._id,studentId:user.data.id,status:"Absent", date:now.toString(),location:''} //address
                 }else if(now>late && now<=end){
-                    body={attendanceCollectionId:attendance.data._id,studentId:user.data.id,status:"Late", date:now.toString(),location:address}
+                    body={attendanceCollectionId:attendance.data._id,studentId:user.data.id,status:"Late", date:now.toString(),location:''}
                 }else if(now<=late  && now<=end){
-                    body={attendanceCollectionId:attendance.data._id,studentId:user.data.id,status:"Present", date:now.toString(),location:address}
+                    body={attendanceCollectionId:attendance.data._id,studentId:user.data.id,status:"Present", date:now.toString(),location:''}
                 }
                 
                 
