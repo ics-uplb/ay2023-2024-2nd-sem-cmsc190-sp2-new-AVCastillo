@@ -146,7 +146,7 @@ const ViewClass=()=>{
             axios.delete(`${process.env.REACT_APP_API_SERVER}/api/deleteClass?id=${(state.classes.data)[index]._id}`,{withCredentials:true}).then(({data})=>{
             })
             closeDeleteDialog()
-            setRefresh(true)
+            setRefresh(!refresh)
             setSuccess('success')
             setSnackbarLabel('Successfully deleted class')
             openSnackbar(true)
