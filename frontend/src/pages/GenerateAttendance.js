@@ -45,9 +45,9 @@ const GenerateAttendance=()=>{
     const createAttendance= async ()=>{
         if(startTime && endTime){
 
-            const students=await axios.get(`/api/getStudIds?classId=${classId}`,{withCredentials:true})
-            const created= await axios.post(`/api/createAttendance`,{classId:classId,startSched:startTime.toString(),endSched:endTime.toString()},{withCredentials:true})
-            const indiv= await  axios.post(`/api/createIndivAttendance`,{classId:classId,studentIds:students.data,attendanceCollectionId:created.data._id,searchDate:created.data.startSched},{withCredentials:true})
+            const students=await axios.get(`${process.env.REACT_APP_API_SERVER}/api/getStudIds?classId=${classId}`,{withCredentials:true})
+            const created= await axios.post(`${process.env.REACT_APP_API_SERVER}/api/createAttendance`,{classId:classId,startSched:startTime.toString(),endSched:endTime.toString()},{withCredentials:true})
+            const indiv= await  axios.post(`${process.env.REACT_APP_API_SERVER}/api/createIndivAttendance`,{classId:classId,studentIds:students.data,attendanceCollectionId:created.data._id,searchDate:created.data.startSched},{withCredentials:true})
         
         
             generateQR(created.data._id)

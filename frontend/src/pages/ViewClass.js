@@ -108,7 +108,7 @@ const ViewClass=()=>{
     useEffect(()=>{
     
       async function getUserApp(){
-        const user = await axios.get('/api/getProfile',{withCredentials:true});
+        const user = await axios.get(`${process.env.REACT_APP_API_SERVER}/api/getProfile`,{withCredentials:true});
 
         if(user.data===""){
             navigate("/")
@@ -118,13 +118,13 @@ const ViewClass=()=>{
         setRole(user.data.role)
         dispatchUser({type:'SET_USER',payload:user})
         if(user.data.role==='Teacher'){
-            const classes = await axios.get(`/api/getTeacherClasses?teacherId=${user.data.id}`,{withCredentials:true})
+            const classes = await axios.get(`${process.env.REACT_APP_API_SERVER}/api/getTeacherClasses?teacherId=${user.data.id}`,{withCredentials:true})
             dispatch({type:'SET_CLASSES',payload:classes})
 
 
             setClassState(classes.data)
         }else if(user.data.role==='Student'){
-            const classes = await axios.get(`/api/getStudentClasses?studentId=${user.data.id}`,{withCredentials:true})
+            const classes = await axios.get(`${process.env.REACT_APP_API_SERVER}/api/getStudentClasses?studentId=${user.data.id}`,{withCredentials:true})
             dispatch({type:'SET_CLASSES',payload:classes})
             setClassState(classes.data)
         }
@@ -143,7 +143,7 @@ const ViewClass=()=>{
      const deleteClass=()=>{
         
         try{
-            axios.delete(`/api/deleteClass?id=${(state.classes.data)[index]._id}`,{withCredentials:true}).then(({data})=>{
+            axios.delete(`${process.env.REACT_APP_API_SERVER}/api/deleteClass?id=${(state.classes.data)[index]._id}`,{withCredentials:true}).then(({data})=>{
             })
             closeDeleteDialog()
             setRefresh(true)
@@ -194,7 +194,7 @@ const ViewClass=()=>{
         e.preventDefault()
 
         if(enterClassCode){
-            const joinData=await axios.post(`/api/joinClass`,{code:enterClassCode, studentId:user.data.id},{withCredentials:true})
+            const joinData=await axios.post(`${process.env.REACT_APP_API_SERVER}/api/joinClass`,{code:enterClassCode, studentId:user.data.id},{withCredentials:true})
             if(joinData.data.error){
 
             
@@ -221,7 +221,7 @@ const ViewClass=()=>{
         
         if(enterClassCodeT){
         
-            const joinData=await axios.post(`/api/joinClassTeacher`,{code:enterClassCodeT, teacherId:user.data.id},{withCredentials:true})
+            const joinData=await axios.post(`${process.env.REACT_APP_API_SERVER}/api/joinClassTeacher`,{code:enterClassCodeT, teacherId:user.data.id},{withCredentials:true})
             if(joinData.data.error){
 
             
@@ -244,7 +244,7 @@ const ViewClass=()=>{
 
     const leaveClass=()=>{
 
-        axios.post(`/api/leaveClass`,{code:(state.classes.data)[index].classCode, studentId:user.data.id},{withCredentials:true}).then(res =>{
+        axios.post(`${process.env.REACT_APP_API_SERVER}/api/leaveClass`,{code:(state.classes.data)[index].classCode, studentId:user.data.id},{withCredentials:true}).then(res =>{
 
         })
         closeDeleteDialog()

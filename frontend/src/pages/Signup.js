@@ -243,7 +243,7 @@ const Signup = ()=>{
 
     
             try{
-                await axios.post(`/api/signup`,newuser,{withCredentials:true}).then(res =>{
+                await axios.post(`${process.env.REACT_APP_API_SERVER}/api/signup`,newuser,{withCredentials:true}).then(res =>{
         
                 })
                 setFname('')

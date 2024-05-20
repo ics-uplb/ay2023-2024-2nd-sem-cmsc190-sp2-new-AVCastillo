@@ -63,7 +63,7 @@ const ScanQR=()=>{
     useEffect(()=>{
 
         async function getUser(){
-            const student = await axios.get('/api/getProfile',{withCredentials:true});
+            const student = await axios.get(`${process.env.REACT_APP_API_SERVER}/api/getProfile`,{withCredentials:true});
             dispatchUser({type:'SET_USER',payload:student})
 
         }
@@ -126,7 +126,7 @@ const ScanQR=()=>{
 
       
     const compareTime= async (result)=>{
-        const attendance= await axios.get(`/api/getAttendance?attendanceId=${result}`,{withCredentials:true})
+        const attendance= await axios.get(`${process.env.REACT_APP_API_SERVER}/api/getAttendance?attendanceId=${result}`,{withCredentials:true})
 
         if(attendance.data!==null){
             const now=new Date()
@@ -149,10 +149,10 @@ const ScanQR=()=>{
                 }
                 
                 
-                const duplicate=await axios.get(`/api/checkDuplicateAttendance?studentId=${user.data.id}&attendanceCollectionId=${attendance.data._id}`,{withCredentials:true})
+                const duplicate=await axios.get(`${process.env.REACT_APP_API_SERVER}/api/checkDuplicateAttendance?studentId=${user.data.id}&attendanceCollectionId=${attendance.data._id}`,{withCredentials:true})
 
                 if(duplicate.data===null){
-                    const record=await axios.post(`/api/recordAttendance`,body,{withCredentials:true})
+                    const record=await axios.post(`${process.env.REACT_APP_API_SERVER}/api/recordAttendance`,body,{withCredentials:true})
                 }else{
                     console.log("You already recorded your attendance")
                 }

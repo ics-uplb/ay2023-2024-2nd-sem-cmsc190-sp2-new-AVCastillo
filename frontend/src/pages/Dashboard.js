@@ -152,12 +152,12 @@ const Dashboard = ()=>{
       };
 
     const getUser=()=>{
-        axios.get(`/api/findUser?id=${userData.id}`,{withCredentials:true}).then(({data})=>{
+        axios.get(`${process.env.REACT_APP_API_SERVER}/api/findUser?id=${userData.id}`,{withCredentials:true}).then(({data})=>{
         setUserData(data)
        })
     }
     const logout = ()=>{
-        axios.get('/api/logout',{withCredentials:true}).then((response)=>{
+        axios.get(`${process.env.REACT_APP_API_SERVER}/api/logout`,{withCredentials:true}).then((response)=>{
         })
         navigate('/')
          
@@ -172,7 +172,7 @@ const Dashboard = ()=>{
         e.preventDefault()
 
         
-        await axios.post(`/api/joinClass`,{code:enterClassCode, studentId:userData.id},{withCredentials:true}).then(res =>{
+        await axios.post(`${process.env.REACT_APP_API_SERVER}/api/joinClass`,{code:enterClassCode, studentId:userData.id},{withCredentials:true}).then(res =>{
 
         })
         closeJoinD()
@@ -187,7 +187,7 @@ const Dashboard = ()=>{
         if(!classnameError && !sectionError && !codeError){
            
             try{
-                await axios.post(`/api/createClass`,{className,section,classCode,teacherId,teacherName},{withCredentials:true}).then(res =>{
+                await axios.post(`${process.env.REACT_APP_API_SERVER}/api/createClass`,{className,section,classCode,teacherId,teacherName},{withCredentials:true}).then(res =>{
         
                 })
                 

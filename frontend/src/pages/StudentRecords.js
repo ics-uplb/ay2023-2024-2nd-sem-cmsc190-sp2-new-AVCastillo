@@ -93,11 +93,11 @@ const StudentRecord=()=>{
 
     useEffect(()=>{
         async function getUser(){
-            const user=await axios.get('/api/getProfile',{withCredentials:true});
+            const user=await axios.get(`${process.env.REACT_APP_API_SERVER}/api/getProfile`,{withCredentials:true});
             setUserId(user.data.id)
 
-            const absent=await axios.get(`/api/autoAbsent?classId=${classId}&studentId=${user.data.id}`,{withCredentials:true})
-            const record= await axios.get(`/api/displayStudentAttendance?classId=${classId}&studentId=${user.data.id}`,{withCredentials:true})
+            const absent=await axios.get(`${process.env.REACT_APP_API_SERVER}/api/autoAbsent?classId=${classId}&studentId=${user.data.id}`,{withCredentials:true})
+            const record= await axios.get(`${process.env.REACT_APP_API_SERVER}/api/displayStudentAttendance?classId=${classId}&studentId=${user.data.id}`,{withCredentials:true})
             const gridRecord=record.data
             setRecords(record)
             // dispatchUser({type:'SET_USER',payload:user})
@@ -118,10 +118,10 @@ const StudentRecord=()=>{
             });
             setRows(gridRecord)
 
-            const threshold= await axios.get(`/api/getClassThreshold?classId=${classId}`,{withCredentials:true})
+            const threshold= await axios.get(`${process.env.REACT_APP_API_SERVER}/api/getClassThreshold?classId=${classId}`,{withCredentials:true})
             
 
-            const absences= await axios.get(`/api/getAbsences?classId=${classId}&studentId=${user.data.id}`,{withCredentials:true})
+            const absences= await axios.get(`${process.env.REACT_APP_API_SERVER}/api/getAbsences?classId=${classId}&studentId=${user.data.id}`,{withCredentials:true})
             let absence=0
             let excuses=0
             let pending=0
@@ -176,16 +176,16 @@ const StudentRecord=()=>{
           formData.append('studentId',userId)
           formData.append('dateSubmitted',dateSubmitted)
           formData.append('indivAttendanceId',handleUpIndivId)
-          await axios.post('/api/uploadExcuseLetter', formData, {
+          await axios.post(`${process.env.REACT_APP_API_SERVER}/api/uploadExcuseLetter`, formData, {
             headers: {
               'Content-Type': 'multipart/form-data'
             }
           });
          
           
-          await axios.post("/api/createNotification",{classId:classId, senderName:handleUpName,senderId:userId, sendTo:'',roleOfReceiver:"Teacher", type:"Excuse"
+          await axios.post(`${process.env.REACT_APP_API_SERVER}/api/createNotification`,{classId:classId, senderName:handleUpName,senderId:userId, sendTo:'',roleOfReceiver:"Teacher", type:"Excuse"
           ,notifString:`${handleUpName} sent an excuse letter for ${handleUpDate} class`,dateSubmitted:dateSubmitted},{withCredentials:true})
-          await axios.post("/api/editSubmittedExcuse",{indivAttendanceId:handleUpIndivId, submitted:true},{withCredentials:true})
+          await axios.post(`${process.env.REACT_APP_API_SERVER}/api/editSubmittedExcuse`,{indivAttendanceId:handleUpIndivId, submitted:true},{withCredentials:true})
 
           for(const rec of rows){
             if (rec.id===paramsIndex){

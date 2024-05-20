@@ -24,16 +24,16 @@ const ExcuseLetters=()=>{
     useEffect(()=>{
       
       async function getLetters(){
-        const indivs= await axios.get(`/api/getAllIndivAttendances?classId=${classId}`,{withCredentials:true})
+        const indivs= await axios.get(`${process.env.REACT_APP_API_SERVER}/api/getAllIndivAttendances?classId=${classId}`,{withCredentials:true})
         let pdfArray=[]
         let pdfNameArray=[]
         let dateSubmitArray=[]
         console.log(indivs)
         for (const indiv of indivs.data){
-          const letter = await axios.get(`/api/getClassExcuseLetters?indivAttendanceId=${indiv._id}`,{
+          const letter = await axios.get(`${process.env.REACT_APP_API_SERVER}/api/getClassExcuseLetters?indivAttendanceId=${indiv._id}`,{
                 responseType: 'blob'},{withCredentials:true})
           if(letter.data.size!==0){
-            const pdfName= await axios.get(`/api/getPdfName?indivAttendanceId=${indiv._id}`,{withCredentials:true})
+            const pdfName= await axios.get(`${process.env.REACT_APP_API_SERVER}/api/getPdfName?indivAttendanceId=${indiv._id}`,{withCredentials:true})
             pdfArray.push(letter.data)
             dateSubmitArray.push(pdfName.data.dateSubmitted)
             pdfNameArray.push(pdfName.data.name)

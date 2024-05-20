@@ -33,7 +33,7 @@ const app = express()
 
 const corsOptions = {
     // origin: ["https://uplbattedancetracker.vercel.app","https://uplbattedancetracker.vercel.app/","https://uplbattedancetracker.vercel.app//"],
-    origin:["https://castillo-sp2.vercel.app","https://castillo-sp2.vercel.app/"],
+    origin:["https://castillo-sp2.vercel.app","https://castillo-sp2.vercel.app/", "http://localhost:3000"],
     credentials: true,
     methods: ['GET', 'POST', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization']

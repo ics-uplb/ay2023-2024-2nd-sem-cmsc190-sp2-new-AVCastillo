@@ -174,16 +174,16 @@ const AccountSettings=()=>{
 
     useEffect(()=>{
         async function getUser(){
-            const user= await axios.get("/api/getProfile",{withCredentials:true})
+            const user= await axios.get(`${process.env.REACT_APP_API_SERVER}/api/getProfile`,{withCredentials:true})
             if(user.data===""){
                 navigate("/")
             }
             setUser(user.data)
             if(user.data.role==='Student'){
-                const deets= await axios.get(`/api/getStudentDetails?id=${user.data.id}`,{withCredentials:true})
+                const deets= await axios.get(`${process.env.REACT_APP_API_SERVER}/api/getStudentDetails?id=${user.data.id}`,{withCredentials:true})
                 setStudAccount(deets.data.details)
             }else{
-                const deets= await axios.get(`/api/getTeacherDetails?id=${user.data.id}`,{withCredentials:true})
+                const deets= await axios.get(`${process.env.REACT_APP_API_SERVER}/api/getTeacherDetails?id=${user.data.id}`,{withCredentials:true})
                 setStudAccount(deets.data.details)
             }
             
@@ -212,21 +212,21 @@ const AccountSettings=()=>{
                 
                 if(!phoneNumError){
                     studAccount[indexSelected+4]=phoneNumHolder
-                    const data= await axios.post('/api/editPhoneNum',{id:user.id, phoneNum:phoneNumHolder},{withCredentials:true})
+                    const data= await axios.post(`${process.env.REACT_APP_API_SERVER}/api/editPhoneNum`,{id:user.id, phoneNum:phoneNumHolder},{withCredentials:true})
                    
                     closeDialog()
                 }
             }else if(indexSelected===1){
                     if(!gNameError){
                         studAccount[indexSelected+4]=guardianNameHolder
-                        const data= await axios.post('/api/editGuardianName',{id:user.id,guardianName:guardianNameHolder},{withCredentials:true})
+                        const data= await axios.post(`${process.env.REACT_APP_API_SERVER}/api/editGuardianName`,{id:user.id,guardianName:guardianNameHolder},{withCredentials:true})
                        
                         closeDialog()
                     }
             }else if(indexSelected===2){
                 if(!gContactError){
                     studAccount[indexSelected+4]=guardianContactHolder
-                    const data= await axios.post('/api/editGuardianContact',{id:user.id,guardianContact:guardianContactHolder},{withCredentials:true})
+                    const data= await axios.post(`${process.env.REACT_APP_API_SERVER}/api/editGuardianContact`,{id:user.id,guardianContact:guardianContactHolder},{withCredentials:true})
                     closeDialog()
                 }
             }
