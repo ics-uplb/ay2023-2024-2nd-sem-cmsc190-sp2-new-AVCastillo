@@ -1,5 +1,5 @@
 import { signUP,findAll, logIn,getProfile,logOut,findUser,checkFraud,getName,getTeacherName,getSProfileDetails,editGuardianName,editPhoneNum,editGuardianContact,getTProfileDetails } from "./api/user.js";
-import { createClass,getTeacherClasses,deleteClass,joinClass ,getStudentClasses,leaveClass,getStudentIds,addToClass,setThreshold,getClassThreshold,displayPeople,joinClassTeacher} from "./api/class.js";
+import { createClass,getTeacherClasses,deleteClass,joinClass ,getStudentClasses,leaveClass,getStudentIds,addToClass,setThreshold,getClassThreshold,displayPeople,joinClassTeacher, classLabel} from "./api/class.js";
 import { createAttendance ,getAttendance,recordAttendance,modifyAttendanceField} from "./api/attendance.js";
 import { createIndivAttendance,checkDuplicateAttendance,searchDisplay,editStatus,editSubmittedExcuse,getAllIndivAttendances,
     getAbsences,autoAbsent,autoAbsentClass} from "./api/indivAttendance.js";
@@ -73,5 +73,6 @@ router.get("/api/getTeacherDetails",getTProfileDetails)
 router.post("/api/editPhoneNum",editPhoneNum)
 router.post("/api/editGuardianName",editGuardianName)
 router.post("/api/editGuardianContact",editGuardianContact)
+router.get("/api/classLabel",classLabel)
 
 export default router;

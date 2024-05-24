@@ -84,6 +84,7 @@ const StudentRecord=()=>{
     const [absenceWarning,setWarning]=useState(false)
     const [absenceReached,setReached]=useState(false)
     const [absenceExceeded,setExceeded]=useState(false)
+    const [classLabel,setClassLabel]=useState(null)
     const [anchor, setAnchor] =useState(null);
     const open = Boolean(anchor);
     const id = open ? 'simple-popup' : undefined;
@@ -95,6 +96,9 @@ const StudentRecord=()=>{
         async function getUser(){
             const user=await axios.get(`${process.env.REACT_APP_API_SERVER}/api/getProfile`,{withCredentials:true});
             setUserId(user.data.id)
+            const label=await axios.get(`${process.env.REACT_APP_API_SERVER}/api/classLabel?classId=${classId}`,{withCredentials:true});
+            console.log(label.data)
+            setClassLabel(label.data)
 
             const absent=await axios.get(`${process.env.REACT_APP_API_SERVER}/api/autoAbsent?classId=${classId}&studentId=${user.data.id}`,{withCredentials:true})
             const record= await axios.get(`${process.env.REACT_APP_API_SERVER}/api/displayStudentAttendance?classId=${classId}&studentId=${user.data.id}`,{withCredentials:true})
@@ -344,9 +348,9 @@ const StudentRecord=()=>{
                 </Dialog>
 
             <Box sx={{paddingTop:2}}>
+              <Typography  marginLeft={1.7} variant='h6' fontWeight={"bold"} textAlign={"left"} paddingBottom={1}>{classLabel}</Typography>
               <Stack direction="row">
                 
-        
                 <Box margin={1}>
                   <Card >
                     

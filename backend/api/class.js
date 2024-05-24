@@ -212,6 +212,17 @@ const getClassThreshold= async(req,res)=>{
     }
 }
 
+const classLabel= async(req,res)=>{
+    try{
+        const classDeets= await classModel.findOne({_id:req.query.classId})
+        const label= `${classDeets.className} - ${classDeets.section}`
+        res.status(200).json(label)
+
+    }catch(err){
+        res.json({error:err.message})
+    }
+}
 
 
-export {createClass,getTeacherClasses,getStudentClasses,deleteClass,joinClass,leaveClass,getStudentIds,addToClass,setThreshold,getClassThreshold,displayPeople,joinClassTeacher}
+
+export {createClass,getTeacherClasses,getStudentClasses,deleteClass,joinClass,leaveClass,getStudentIds,addToClass,setThreshold,getClassThreshold,displayPeople,joinClassTeacher,classLabel}

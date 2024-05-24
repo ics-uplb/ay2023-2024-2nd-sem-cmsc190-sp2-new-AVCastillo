@@ -367,11 +367,12 @@ const ViewClass=()=>{
                             </Stack >
                             
                     </DialogContent>
-                    </Dialog>                
-                <Grid container sx={{marginTop:10}} columns={{xs:16, sm:16, md:24, lg:32}} spacing={2}>
-                    <Grid item xs={16} sm={8} md={6} lg={8}>
-                    <Typography fontWeight={"bold"} variant="h5" >Classes</Typography>
-                    </Grid>
+                    </Dialog>     
+                    <Typography paddingTop={10} paddingBottom={2} fontWeight={"bold"} variant="h5" >Classes</Typography>           
+                    <Grid container  columns={{xs:16, sm:16, md:24, lg:32}} spacing={2}>
+                    {/* <Grid item xs={16} sm={8} md={6} lg={8}>
+                   
+                    </Grid> */}
                     {classState.map((result,index)=>(
                         <Grid item xs={16} sm={8} md={6} lg={8} key={index}>
                             <Card variant="outlined" sx={{ m: 'auto' }}>

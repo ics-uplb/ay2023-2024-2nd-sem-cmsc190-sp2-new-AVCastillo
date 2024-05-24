@@ -92,6 +92,7 @@ const TeacherRecord=()=>{
     const [parameters,setParameters]=useState(null)
     const [userName, setUserName]=useState(null)
     const [view,setView]=useState(true)
+    const [classLabel,setClassLabel]=useState(null)
     
     
 
@@ -103,6 +104,9 @@ const TeacherRecord=()=>{
             const absent=await axios.get(`${process.env.REACT_APP_API_SERVER}/api/autoAbsentClass?classId=${classId}`,{withCredentials:true})
             const dates=await axios.get(`${process.env.REACT_APP_API_SERVER}/api/getTeacherAttendance?classId=${classId}`,{withCredentials:true})
             setOptions(dates.data.dates)
+            const label=await axios.get(`${process.env.REACT_APP_API_SERVER}/api/classLabel?classId=${classId}`,{withCredentials:true});
+            console.log(label.data)
+            setClassLabel(label.data)
             
         }
         getUser()
@@ -204,7 +208,7 @@ const TeacherRecord=()=>{
               <Dropdown>
               <Stack direction="row">
               <IconButton onClick={()=>{setDateRecorded(params.row.date);setStatus(params.row.status);setLocation(params.row.location);setDetails(true) }}><InfoIcon/></IconButton>
-              <MenuButton><EditIcon/></MenuButton>
+              <MenuButton><EditIcon sx={{color:"black"}}/></MenuButton>
               
               </Stack>
               <Menu slots={{ listbox: Listbox }}>
@@ -287,8 +291,12 @@ const TeacherRecord=()=>{
         if(view){
           return(
               <>
+                <Box paddingTop={2}>
+                <Typography  marginLeft={2.1} variant='h6' fontWeight={"bold"} textAlign={"left"} paddingBottom={1}>{classLabel}</Typography>
+                </Box>
               
-                <Grid sx={{paddingTop:3}} container columns={{xs:12, sm:16, md:24, lg:32}}>
+                <Grid sx={{paddingTop:1}} container columns={{xs:12, sm:16, md:24, lg:32}}>
+                
                   <Grid item xs={12} sm={16} md={8} lg={6} order={{ md: 2, lg: 2 }}>
 
                   <Button  onClick={changeView} sx={{width:"90%",marginBottom:2}} variant='contained' fullWidth>Change View</Button>

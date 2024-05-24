@@ -2,7 +2,7 @@ import {useParams} from 'react-router-dom';
 import axios from 'axios';
 import{useState,useEffect} from 'react'
 import { useUserContext } from "../hooks/useUserContext";
-import {Box,Button,Grid,IconButton,Dialog,Stack} from '@mui/material';
+import {Box,Button,Grid,IconButton,Dialog,Stack, Typography} from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 import VisibilityRoundedIcon from '@mui/icons-material/VisibilityRounded';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -36,6 +36,7 @@ const TeacherRecord2=()=>{
     const [className,setClassName]=useState(null)
     const [section,setSection]=useState(null)
     const [t2view,setT2View]=useState(true)
+    const [classLabel,setClassLabel]=useState(null)
     
 
     useEffect(()=>{
@@ -44,6 +45,9 @@ const TeacherRecord2=()=>{
             const attendance=await axios.get(`${process.env.REACT_APP_API_SERVER}/api/displayTRecords2?classId=${classId}`,{withCredentials:true})
             setClassName(attendance.data.className)
             setSection(attendance.data.section)
+            const label=await axios.get(`${process.env.REACT_APP_API_SERVER}/api/classLabel?classId=${classId}`,{withCredentials:true});
+            console.log(label.data)
+            setClassLabel(label.data)
 
             
             if((attendance.data.attendance).length!==0){
@@ -146,7 +150,10 @@ const TeacherRecord2=()=>{
         if(t2view){
             return(
                 <>
-                <Grid container sx={{paddingTop:3,paddingBottom:3}}columns={{xs:12, sm:16, md:24, lg:32}}>
+                <Box paddingTop={2}>
+                <Typography  marginLeft={2.1} variant='h6' fontWeight={"bold"} textAlign={"left"} paddingBottom={1}>{classLabel}</Typography>
+                </Box>
+                <Grid container sx={{paddingTop:1,paddingBottom:3}}columns={{xs:12, sm:16, md:24, lg:32}}>
                   <Grid item xs={12} sm={16} md={8} lg={10}>
                   <Button onClick={changeView} sx={{width:"90%"}} variant='contained' fullWidth>Change View</Button>
                   </Grid>
@@ -196,9 +203,30 @@ const TeacherRecord2=()=>{
     //     )
     // }
        }else{
-         return(
-            <div>no data</div>
-         )
+         
+            
+            // <div>no data</div>
+            // <Box sx={{paddingTop:2}} >
+                
+            //     <Button onClick={changeView}  variant='contained' >Change View</Button>
+            //     <Typography fontWeight={2} paddingTop={2}>No data yet</Typography>
+                
+            // </Box>
+            if(t2view){
+                return(
+                <Grid container sx={{paddingTop:3,paddingBottom:3}}columns={{xs:12, sm:16, md:24, lg:32}}>
+                    <Grid item xs={12} sm={16} md={8} lg={10}>
+                    <Button onClick={changeView} sx={{width:"90%"}} variant='contained' fullWidth>Change View</Button>
+                    </Grid>
+                    
+                </Grid>
+                )
+            }else{
+                return(
+                    <TeacherRecord/>
+                )
+            }
+         
        }
 
 }
