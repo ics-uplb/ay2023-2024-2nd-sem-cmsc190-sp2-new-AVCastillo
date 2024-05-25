@@ -2,7 +2,7 @@ import {useParams} from 'react-router-dom';
 import axios from 'axios';
 import{useState,useEffect} from 'react'
 import { useUserContext } from "../hooks/useUserContext";
-import {Box,Button,Grid,IconButton,Dialog,Stack,Typography,TextField,Card} from '@mui/material';
+import {Box,Button,Grid,IconButton,Dialog,Stack,Typography,TextField,Card, Alert, Snackbar} from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 import InfoIcon from '@mui/icons-material/Info';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -86,6 +86,9 @@ const StudentRecord=()=>{
     const [absenceExceeded,setExceeded]=useState(false)
     const [classLabel,setClassLabel]=useState(null)
     const [anchor, setAnchor] =useState(null);
+    const [openSnack, setOpenSnack]=useState(false)
+    const [snackbarLabel, setSnackbarLabel]=useState(null)
+    const [success,setSuccess]=useState(null)
     const open = Boolean(anchor);
     const id = open ? 'simple-popup' : undefined;
     
@@ -163,7 +166,9 @@ const StudentRecord=()=>{
         getUser()
     },[])
 
-
+    const closeSnackbar=()=>{
+      setOpenSnack(false)
+    }
     const handleFileChange = (event) => {
       setFile(event.target.files[0]);
     };
@@ -196,15 +201,23 @@ const StudentRecord=()=>{
               rec["submittedExcuse"]=true;
             }
           }
-          alert('PDF file uploaded successfully');
+          setOpenSnack(true)
+          setSnackbarLabel('PDF file uploaded successfully')
+          setSuccess('success')
         } catch (error) {
           console.error(error);
-          alert('Error uploading PDF file');
+          setOpenSnack(true)
+          setSnackbarLabel('Error uploading PDF file')
+          setSuccess('error')
         }
         setFile(null)
         closeExcuse()
       }else{
-        alert("choose a file first")
+        
+        setOpenSnack(true)
+        setSnackbarLabel("Choose a file first")
+        setSuccess('warning')
+        
       }
     };
 
@@ -430,7 +443,16 @@ const StudentRecord=()=>{
                
           </Box>
           
-          
+          <Snackbar open={openSnack} autoHideDuration={3000} onClose={closeSnackbar} anchorOrigin={{vertical: 'bottom', horizontal: 'right'}}>
+            <Alert
+            onClose={closeSnackbar}
+            severity={success}
+            variant="filled"
+            sx={{ width: '100%' }}
+            >
+            {snackbarLabel}
+                </Alert>
+            </Snackbar>
         </div>
         )
     }else{

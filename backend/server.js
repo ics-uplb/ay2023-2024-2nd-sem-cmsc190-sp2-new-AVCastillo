@@ -33,7 +33,7 @@ const app = express()
 
 const corsOptions = {
     // origin: ["https://uplbattedancetracker.vercel.app","https://uplbattedancetracker.vercel.app/","https://uplbattedancetracker.vercel.app//"],
-    origin:["https://castillo-sp2.vercel.app","https://castillo-sp2.vercel.app/", "http://localhost:3000"],
+    origin:["https://castillo-sp2.vercel.app","https://castillo-sp2.vercel.app/", "http://localhost:3000","https://nominatim.openstreetmap.org/reverse"],
     credentials: true,
     methods: ['GET', 'POST', 'OPTIONS', "DELETE"],
     allowedHeaders: ['Content-Type', 'Authorization']

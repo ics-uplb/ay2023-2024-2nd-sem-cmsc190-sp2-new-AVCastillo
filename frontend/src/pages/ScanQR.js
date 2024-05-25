@@ -1,7 +1,7 @@
 import React, { useState,useEffect,useRef } from 'react';
 import axios from 'axios';
 import {Html5QrcodeScanner} from 'html5-qrcode';
-import {Box,Button, Typography} from '@mui/material'
+import {Box,Button, Typography,Snackbar,Alert,Stack} from '@mui/material'
 import { useUserContext } from '../hooks/useUserContext';
 import CircularProgress from '@mui/material/CircularProgress';
 import {useParams} from 'react-router-dom';
@@ -15,6 +15,10 @@ const ScanQR=()=>{
     const [isScanning, setIsScanning] = useState(true);
     const {classId}=useParams()
     const [address,setAddress]=useState(null)
+    const [openSnack, setOpenSnack]=useState(null)
+    const [success, setSuccess]=useState(null)
+    const [snackbarLabel, setOpenSnackbarLabel]=useState(null)
+    const [circularTimer,setTimer]=useState(false)
     let qrScanner = null;
 
     // const [address,setAddress]=useState(null)
@@ -28,11 +32,12 @@ const ScanQR=()=>{
     const reverseGeocodeOSM = async (lat, lng) => {
         try {
           const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`;
-          const response = await axios.get(url,{withCredentials:true});
-          setAddress(response.data.display_name)
+          const response = await axios.get(url);
+        //   console.log(response.data.display_name)
+        //   setAddress(response.data.display_name)
         
         //   setAddress(response.data.display_name)
-        //   return response.data.display_name; // Returns the full address
+          return response.data.display_name; // Returns the full address
         } catch (error) {
           console.error('Geocoding error:', error.message);
         //   return null;
@@ -48,7 +53,18 @@ const ScanQR=()=>{
                 lng: location.coords.longitude,
             },
         });
+
+        async function reverse(){
+            const address= await reverseGeocodeOSM(location.coords.latitude,location.coords.longitude)
+            console.log(address)
+            setAddress(address)
+        }
+        reverse()
+        // console.log(location.coords.latitude)
         // console.log(reverseGeocodeOSM(location.coords.latitude,location.coords.longitude))
+        // setAddress(reverseGeocodeOSM(location.coords.latitude,location.coords.longitude))
+        // console.log(address)
+        
 
     };
 
@@ -59,7 +75,10 @@ const ScanQR=()=>{
         });
         console.log(error)
     };
-
+    const closeSnackbar=()=>{
+        setOpenSnack(false)
+      }
+    
 
     useEffect(()=>{
 
@@ -74,7 +93,7 @@ const ScanQR=()=>{
          //get location
         const geoOptions = {
             maximumAge: 30000,
-            timeout: 5000,
+            timeout: 10000,
             enableHighAccuracy: true  // Request higher accuracy from the device
         };
         if (!("geolocation" in navigator)) {
@@ -86,13 +105,28 @@ const ScanQR=()=>{
 
         navigator.geolocation.getCurrentPosition(onSuccess, onError,geoOptions);
 
-        
-
 
     },[])
 
 
+   const startTimeout=()=>{
+    
+    async function timeout(){
+        setTimer(true)
+        await delay(2500)
+        setTimer(false)
+        startScanning()
+    }
+    
+    timeout()
+    
+  
+  
+   }
+
+
     const startScanning = () => {
+        console.log(address)
 
         if(isScanning){
                 setIsScanning(false);
@@ -110,9 +144,7 @@ const ScanQR=()=>{
                     // qrScanner.stop()
                     setIsScanning(true)
                     compareTime(result)
-                    // compareTime(result)
-                    // setScannedResult(result)
-                    // alert(result)
+                    
                     
                 }
 
@@ -127,8 +159,15 @@ const ScanQR=()=>{
         
       };
 
+    function delay(ms) {
+        // setTimeout(console.log("2 secs"),ms)
+        // return(setTimeout(()=>{}, ms))
+        
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
       
     const compareTime= async (result)=>{
+        
         const attendance= await axios.get(`${process.env.REACT_APP_API_SERVER}/api/getAttendance?attendanceId=${result}`,{withCredentials:true})
         console.log(result)
         if(attendance.data!==null){
@@ -139,18 +178,23 @@ const ScanQR=()=>{
             const late= new Date(startTemp.setMinutes(startTemp.getMinutes()+15))
 
             console.log(now,end)
+            console.log(address)
 
             if(now<start){
 
-                alert("Class hasn't started yet")
+                // alert("Class hasn't started yet")
+                setOpenSnack(true)
+                setOpenSnackbarLabel("Class hasn't started yet")
+                setSuccess('error')
             }else{
+               
                 let body={}
                 if(now>end){
-                    body={attendanceCollectionId:attendance.data._id,studentId:user.data.id,status:"Absent", date:now.toString(),location:''} //address
+                    body={attendanceCollectionId:attendance.data._id,studentId:user.data.id,status:"Absent", date:now.toString(),location:address} //address
                 }else if(now>late && now<=end){
-                    body={attendanceCollectionId:attendance.data._id,studentId:user.data.id,status:"Late", date:now.toString(),location:''}
+                    body={attendanceCollectionId:attendance.data._id,studentId:user.data.id,status:"Late", date:now.toString(),location:address}
                 }else if(now<=late  && now<=end){
-                    body={attendanceCollectionId:attendance.data._id,studentId:user.data.id,status:"Present", date:now.toString(),location:''}
+                    body={attendanceCollectionId:attendance.data._id,studentId:user.data.id,status:"Present", date:now.toString(),location:address}
                 }
                 
                 
@@ -159,9 +203,14 @@ const ScanQR=()=>{
                 if(duplicate.data===null){
                     const record=await axios.post(`${process.env.REACT_APP_API_SERVER}/api/recordAttendance`,body,{withCredentials:true})
                     // alert(record.data)
-                    alert("Successfully recorded attendance")
+                    setOpenSnack(true)
+                    setOpenSnackbarLabel("Successfully recorded attendance")
+                    setSuccess('success')
                 }else{
-                    alert("You already recorded your attendance")
+                    setOpenSnack(true)
+                    setOpenSnackbarLabel("You already recorded your attendance")
+                    setSuccess('warning')
+                    
                 }
                 
                 
@@ -182,8 +231,30 @@ const ScanQR=()=>{
         return(
             <>
             <Typography variant='h6' sx={{textAlign:"center", marginTop:10}}>Scan QR Code to record attendance</Typography>
-            <Button variant="contained" sx={{margin:2,backgroundColor:"#00563F",'&:hover': { backgroundColor: '#8D1436'}}} onClick={startScanning}>Scan</Button>
+            <Button variant="contained" sx={{margin:2,backgroundColor:"#00563F",'&:hover': { backgroundColor: '#8D1436'}}} onClick={startTimeout}>Scan</Button>
             <div id="scanner"></div>
+            <Snackbar open={openSnack} autoHideDuration={6000} onClose={closeSnackbar} anchorOrigin={{vertical: 'bottom', horizontal: 'right'}}>
+                    <Alert
+                    onClose={closeSnackbar}
+                    severity={success}
+                    variant="filled"
+                    sx={{ width: '100%' }}
+                    >
+                   {snackbarLabel}
+                    </Alert>
+                </Snackbar>
+                <Box sx={{
+                    display: 'flex',
+                    justifyContent: 'center', // Center horizontally
+                    alignItems: 'center', // Center vertically
+                    height: '10vh', // Full viewport height
+                    // border: '1px solid black',
+                }}>
+               
+                    
+                    {circularTimer?<Typography >Getting location ...</Typography>:<></>}
+                
+                </Box>
             </>
         )
     

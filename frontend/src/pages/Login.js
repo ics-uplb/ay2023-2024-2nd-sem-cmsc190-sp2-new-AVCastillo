@@ -34,29 +34,31 @@ const theme = createTheme({
     MuiTextField:{
       styleOverrides: {
           root: {
-            '& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline': {
-              borderColor: '#00563F', // Change the outline color here
-            },
-            '& .MuiOutlinedInput-input': {
-              color: '#00563F', // Change the text color here
+            '& .MuiOutlinedInput-root': {
+              '& .MuiOutlinedInput-notchedOutline': {
+                borderColor: '#00563F', // Change the outline color here
+              },
+              '&:hover .MuiOutlinedInput-notchedOutline': {
+                borderColor: '#00563F', // Change the outline color on hover here
+              },
+              '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                borderColor: '#00563F', // Change the outline color on focus here
+              },
+              '& .MuiOutlinedInput-input': {
+                color: '#00563F', // Change the text color here
+              },
+              '&:hover .MuiOutlinedInput-input': {
+                color: '#00563F', // Change the text color on hover here
+              },
+              '&.Mui-focused .MuiOutlinedInput-input': {
+                color: '#00563F', // Change the text color on focus here
+              },
             },
             '& .MuiInputLabel-root': {
-              color: '#000000', // Default label color
-            },
-            '&:hover .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline': {
-              borderColor: '#00563F', // Change the outline color on hover here
-            },
-            '&:hover .MuiOutlinedInput-input': {
-              color: '#00563F', // Change the text color on hover here
-            },
-            '& .Mui-focused .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline': {
-              borderColor: '#00563F', // Change the outline color on focus here
-            },
-            '& .Mui-focused .MuiOutlinedInput-input': {
-              color: '#00563F', // Change the text color on focus here
-            },
-            '& .Mui-focused .MuiInputLabel-root': {
-              color: '#00563F', // Change label color on focus here
+              color: 'black', // Default label color
+              '&.Mui-focused': {
+                color: '#00563F', // Change label color on focus here
+              },
             },
           }
       }
