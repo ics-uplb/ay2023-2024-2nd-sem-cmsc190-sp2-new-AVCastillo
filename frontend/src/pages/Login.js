@@ -16,7 +16,8 @@ import {styled} from '@mui/system'
 import LoginIcon from '@mui/icons-material/Login';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
-import { createTheme, ThemeProvider } from '@mui/material';
+import { createTheme, ThemeProvider,Grid,Image } from '@mui/material';
+import image from '../images/arms-logo.jpg'
 
 const theme = createTheme({
   components: {
@@ -55,7 +56,7 @@ const theme = createTheme({
               },
             },
             '& .MuiInputLabel-root': {
-              color: 'black', // Default label color
+              color: '#808080', // Default label color
               '&.Mui-focused': {
                 color: '#00563F', // Change label color on focus here
               },
@@ -161,21 +162,44 @@ const Login= ()=>{
     return (
 
         <ThemeProvider theme={theme}>
+           <Box paddingTop={8}>
+           <Box 
+              component="img"
+              sx={{
+                borderRadius:2,
+                height: 50,
+                width: 50,
+                maxHeight: { xs: 300, md: 200 },
+                maxWidth: { xs: 300, md: 200 },
+              }}
+              alt="arms logo"
+              src={image}
+            />
+           </Box>
+       
+          <Grid   sx={{justifyContent:"center"}} columns={{xs:10, sm:10, md:12, lg:16}} container>
+            <Grid xs={9} sm={9} md={11} lg={15} item>
+            <Typography variant="h5" textAlign={"center"}  sx={{color:'#00563F'}} paddingTop={0} fontWeight={"bold"}>ARMS: Attendance Recording and Monitoring System</Typography>
+            </Grid>
+          </Grid>
+          
+         
+           
           <Box
             sx={{
-              my: 20,
+              my: 6,
               mx: 8,
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
             }}
-          >
-            <Avatar sx={{ m: 1, bgcolor: '#7b1113' }}>
+          > 
+            {/* <Avatar sx={{ m: 1, bgcolor: '#7b1113' }}>
               <LockOutlinedIcon />
-            </Avatar>
-            <Typography component="h1" variant="h5">
+            </Avatar> */}
+            {/* <Typography component="h1" variant="h5">
               Sign in
-            </Typography>
+            </Typography> */}
             <Box component="form" noValidate onSubmit={signin} sx={{ mt: 1 }}>
             <TextField  margin="normal" type="text" label="Email" size="small" onChange={(e)=>{ setEmail(e.target.value)}} 
             value={email} pattern= '.+@.+' title="wrong email format" variant="outlined" fullWidth  />

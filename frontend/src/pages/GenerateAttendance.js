@@ -150,7 +150,17 @@ const GenerateAttendance=()=>{
 
 
         <Grid xs={6} sm={8} md={12} lg={16} item>
-            <Box>{qrcode && <><img src={qrcode} alt="QR Code"/> <Button sx={{color:'#00563F'}} href={qrcode} download={`${downloadName}.png`}>Download</Button> </>}</Box>
+            
+                
+                    {qrcode && <>
+                    
+                        <Box >
+                        <img src={qrcode} alt="QR Code"/> 
+                        </Box>
+                    <Button sx={{color:'#00563F'}} href={qrcode} download={`${downloadName}.png`}>Download</Button> </>} 
+                
+            
+            
         </Grid>
 
 

@@ -194,8 +194,13 @@ const findUser= async(req,res)=>{
 }
 
 const findAll= async(req,res)=>{
-    const studs= await user.find()
-    res.status(200).json(studs)
+    try{
+        const studs= await user.find()
+        res.status(200).json(studs)
+    }catch(err){
+        res.json({error:err.message})
+    }
+   
 
 }
 

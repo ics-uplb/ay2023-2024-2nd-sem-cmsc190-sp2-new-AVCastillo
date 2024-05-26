@@ -12,6 +12,7 @@ import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import { createTheme, ThemeProvider } from '@mui/material';
+import image from '../images/arms-logo.jpg'
 
 const theme = createTheme({
     components: {
@@ -313,93 +314,45 @@ const Signup = ()=>{
         setOpenSnack(false)
     }
         return(
-            // <Grid container>
-            //     <CustomPaper>
-            //     <form e="createStudent" onSubmit={submit}>
-            //         <Typography level="h2" sx={{fontSize:"20px", paddingTop:3}} color="primary" gutterBottom>
-            //         Sign Up
-            //         </Typography>
-
-                    // <Grid container sx={{width:"100%", height:"100%", paddingTop:3}} columns={{xs:6, sm:8, md:12, lg:16}} spacing={2} >
-                    //     <Grid item xs={3}sm={4}md={6}lg={8}>
-                    //         <CustomTextField size="small" InputProps={{ style:{borderRadius: '0px'}}} type="text"  label="First Name"  
-                    //         onChange={(e)=>{ setFname(e.target.value);fnameFormat(e.target.value)}} helperText={fNameHelper}  error={fNameError} variant="outlined" fullWidth/> 
-                    //     </Grid>   
-                    //     <Grid item xs={3} sm={4} md={6} lg={8}> 
-                    //         <CustomTextField size="small" InputProps={{ style:{borderRadius: '0px'}}} type="text" label="Last Name"  
-                    //         onChange={(e)=>{ setLname(e.target.value);lnameFormat(e.target.value)}} helperText={lNameHelper}  error={lNameError} value={lastName} variant="outlined" fullWidth />
-                    //     </Grid>
-
-            //             <Grid item xs={3} sm={4} md={6} lg={8}> 
-            //                 <CustomTextField select size="small" InputProps={{ style:{borderRadius: '0px'}}} type="text" label="Sex"  
-            //                 onChange={(e)=>{ setSex(e.target.value); sexFormat(e.target.value)}} helperText={sexHelper}  error={sexError} value={sex} variant="outlined" fullWidth  >
-            //                 <MenuItem value="M"> Male</MenuItem>
-            //                 <MenuItem value="F"> Female</MenuItem>
-            //                 </CustomTextField>
-
-                           
-            //             </Grid>
-
-                        
-            //             <Grid item xs={3} sm={4} md={6} lg={8}> 
-            //                 <CustomTextField select size="small" InputProps={{ style:{borderRadius: '0px'}}} type="text" label="Role"  
-            //                 onChange={(e)=>{ setRole(e.target.value);roleFormat(e.target.value) 
-            //                     whatRole(e.target.value)}} helperText={roleHelper}  error={roleError}  value={role} variant="outlined" fullWidth  >
-            //                 <MenuItem value="Teacher"> Teacher</MenuItem>
-            //                 <MenuItem value="Student"> Student</MenuItem>
-
-            //                 </CustomTextField>
-                        // </Grid>
-                        // <Grid item xs={6} sm={8} md={12} lg={16}> 
-                        //     {role==="Student"?<CustomTextField type="number" label="Student Number" size="small"  
-                        //     onChange={(e)=>{ setStudnum(e.target.value); studNumFormat(e.target.value)}} helperText={studentNumHelper}  error={studentNumError}  value={studentNum} variant="outlined"  fullWidth />:<></>}
-                        // </Grid>
-                        // <Grid item xs={6} sm={8} md={12} lg={16}> 
-                        //     <CustomTextField type="text" label="Email" size="small" 
-                        //     onChange={(e)=>{ setEmail(e.target.value);emailFormat(e.target.value)}} helperText={emailHelper}  error={emailError} value={email} pattern= '.+@.+' title="wrong email format" variant="outlined" fullWidth />
-                        // </Grid>
-                        // <Grid item xs={6} sm={8} md={12} lg={16}> 
-                        //     <CustomTextField type="password" label="Password" size= "small" 
-                        //     onChange={(e)=>{ setPassword(e.target.value);passwordFormat(e.target.value)}} helperText={passwordHelper}  error={passwordError} value={password} pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$" variant="outlined" fullWidth  /> 
-                        // </Grid>
-
-                    
-            //         </Grid>
-
-            //         <Button sx={{marginTop:3}} type="submit" variant="contained" startIcon={<AppRegistrationIcon/>}> Sign Up</Button>
-                    
-            //         <Snackbar open={openSnack} autoHideDuration={3000} onClose={closeSnackbar} anchorOrigin={{vertical: 'bottom', horizontal: 'right'}}>
-            //         <Alert
-            //         onClose={closeSnackbar}
-            //         severity={success}
-            //         variant="outlined"
-            //         sx={{ width: '100%' }}
-            //         >
-            //         {snackbarLabel}
-            //             </Alert>
-            //         </Snackbar>
-            //     </form>
-            //     </CustomPaper>
-
-                
-            // </Grid>   
+           
             <ThemeProvider theme={theme}>
+                <Box paddingTop={8}>
+           <Box 
+              component="img"
+              sx={{
+                borderRadius:2,
+                height: 50,
+                width: 50,
+                maxHeight: { xs: 300, md: 200 },
+                maxWidth: { xs: 300, md: 200 },
+              }}
+              alt="arms logo"
+              src={image}
+            />
+           </Box>
+       
+          <Grid   sx={{justifyContent:"center"}} columns={{xs:10, sm:10, md:12, lg:16}} container>
+            <Grid xs={9} sm={9} md={11} lg={15} item>
+            <Typography variant="h5" textAlign={"center"}  sx={{color:'#00563F'}} paddingTop={0} fontWeight={"bold"}>ARMS: Attendance Recording and Monitoring System</Typography>
+            </Grid>
+          </Grid>
+          
             
             <Box
             sx={{
-              my: 13,
+              my: 2,
               mx: 4,
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
             }}
           >
-            <Avatar sx={{ m: 1, bgcolor: '#7b1113' }}>
+            {/* <Avatar sx={{ m: 1, bgcolor: '#7b1113' }}>
               <AppRegistrationIcon/>
             </Avatar>
             <Typography component="h1" variant="h5">
               Sign Up
-            </Typography>
+            </Typography> */}
             <Box component="form" noValidate onSubmit={submit} sx={{ mt: 1 }}>
 
             <Grid container sx={{width:"100%", height:"100%", paddingTop:3}} columns={{xs:6, sm:8, md:12, lg:16}} spacing={2} >
