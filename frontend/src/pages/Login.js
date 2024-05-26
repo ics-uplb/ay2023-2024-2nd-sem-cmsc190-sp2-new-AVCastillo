@@ -178,7 +178,7 @@ const Login= ()=>{
            </Box>
        
           <Grid   sx={{justifyContent:"center"}} columns={{xs:10, sm:10, md:12, lg:16}} container>
-            <Grid xs={9} sm={9} md={11} lg={15} item>
+            <Grid xs={9} sm={9} md={11} lg={12} item>
             <Typography variant="h5" textAlign={"center"}  sx={{color:'#00563F'}} paddingTop={0} fontWeight={"bold"}>ARMS: Attendance Recording and Monitoring System</Typography>
             </Grid>
           </Grid>
