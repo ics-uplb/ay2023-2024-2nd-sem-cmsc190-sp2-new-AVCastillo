@@ -179,6 +179,10 @@ const ScanQR=()=>{
 
             console.log(now,end)
             console.log(address)
+            let addressHolder=address
+            if(address===null){
+                addressHolder=`lat:${location.coordinates.lat} lng:${location.coordinates.lng}`
+            }
 
             if(now<start){
 
@@ -190,11 +194,11 @@ const ScanQR=()=>{
                
                 let body={}
                 if(now>end){
-                    body={attendanceCollectionId:attendance.data._id,studentId:user.data.id,status:"Absent", date:now.toString(),location:address} //address
+                    body={attendanceCollectionId:attendance.data._id,studentId:user.data.id,status:"Absent", date:now.toString(),location:addressHolder} //address
                 }else if(now>late && now<=end){
-                    body={attendanceCollectionId:attendance.data._id,studentId:user.data.id,status:"Late", date:now.toString(),location:address}
+                    body={attendanceCollectionId:attendance.data._id,studentId:user.data.id,status:"Late", date:now.toString(),location:addressHolder}
                 }else if(now<=late  && now<=end){
-                    body={attendanceCollectionId:attendance.data._id,studentId:user.data.id,status:"Present", date:now.toString(),location:address}
+                    body={attendanceCollectionId:attendance.data._id,studentId:user.data.id,status:"Present", date:now.toString(),location:addressHolder}
                 }
                 
                 
