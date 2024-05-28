@@ -12,7 +12,7 @@ import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import AddIcon from '@mui/icons-material/Add';
 import SettingsIcon from '@mui/icons-material/Settings';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { Dialog,DialogContent,DialogContentText,TextField,DialogTitle,Card,Stack,Divider,Grid } from "@mui/material";
+import { Dialog,DialogContent,DialogContentText,TextField,DialogTitle,Card,Stack,Divider,Grid,Alert,Snackbar } from "@mui/material";
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
@@ -102,6 +102,9 @@ const ClassSettings=()=>{
     const [guardianName,setGuardianName]=useState(null)
     const [guardianContact,setGuardianContact]=useState(null)
     const [user,setUser]=useState(null)
+    const [openSnack,setOpenSnack]=useState(false)
+    const [success,setSuccess]=useState('')
+    const [snackbarLabel,setSnackbarLabel]=useState('')
 
 
     useEffect(()=>{
@@ -137,11 +140,24 @@ const ClassSettings=()=>{
     const submitThreshold= async()=>{
         if(threshold){
             const data= await axios.post(`${process.env.REACT_APP_API_SERVER}/api/absenceThreshold`,{classId:classId, threshold:threshold},{withCredentials:true})
+            
+            setOpenSnack(true)
+            setSuccess('success')
+            setSnackbarLabel('Class absence threshold updated')
+            closeDialog()
+        }else{
+            closeDialog()
+            setOpenSnack(true)
+            setSuccess('error')
+            setSnackbarLabel('Enter a value')
         }
        
         
     }
 
+    const closeSnackbar=()=>{
+        setOpenSnack(false)
+      }
   
 
     const closeD=()=>{
@@ -182,7 +198,7 @@ const ClassSettings=()=>{
                     open={dialog}
                     onClose={closeDialog}
                     >
-                        <DialogTitle textAlign={"center"}>Enter class threshold</DialogTitle>
+                        <DialogTitle textAlign={"center"}>Enter class absence threshold</DialogTitle>
                         <DialogContent>
                             <Stack direction="column" paddingTop={1} spacing={2}>
                             
@@ -192,6 +208,16 @@ const ClassSettings=()=>{
 
                         </DialogContent>
                     </Dialog>
+                    <Snackbar open={openSnack} autoHideDuration={3000} onClose={closeSnackbar} anchorOrigin={{vertical: 'bottom', horizontal: 'right'}}>
+                        <Alert
+                        onClose={closeSnackbar}
+                        severity={success}
+                        variant="filled"
+                        sx={{ width: '100%' }}
+                        >
+                        {snackbarLabel}
+                            </Alert>
+                        </Snackbar>
                     <Grid  sx={{mt:10}}columns={{xs:8,sm:16,md:24,lg:32}} justifyContent="center" container>
                         
                         <Grid xs={8} sm={16} md={16} lg={24}  item>

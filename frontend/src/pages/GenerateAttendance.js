@@ -118,7 +118,7 @@ const GenerateAttendance=()=>{
                     dateFormat="MMMM d, yyyy h:mm aa"
                     timeCaption="Time"
                     minDate={minDate} // Disable previous days
-                    minTime={minTime} // Disable previous times
+                    // minTime={minTime} // Disable previous times
                     maxTime={new Date(today.getFullYear(), today.getMonth(), today.getDate(), 23, 59)} // Set maximum selectable time for today
 
                 />
@@ -136,7 +136,7 @@ const GenerateAttendance=()=>{
                     dateFormat="MMMM d, yyyy h:mm aa"
                     timeCaption="Time"
                     minDate={minDate} // Disable previous days
-                    minTime={minTime} // Disable previous times
+                    // minTime={minTime} // Disable previous times
                     maxTime={new Date(today.getFullYear(), today.getMonth(), today.getDate(), 23, 59)} // Set maximum selectable time for today
 
                 />
