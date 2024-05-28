@@ -19,6 +19,9 @@ const ScanQR=()=>{
     const [success, setSuccess]=useState(null)
     const [snackbarLabel, setOpenSnackbarLabel]=useState(null)
     const [circularTimer,setTimer]=useState(false)
+    const [isThereAnError, setIsThereAnError]=useState(false)
+    const [geoErrorMessage,setGeoErrorMessage]=useState('')
+    const [geoErrorCode,setGeoErrorCode]=useState('')
     let qrScanner = null;
 
     // const [address,setAddress]=useState(null)
@@ -73,6 +76,9 @@ const ScanQR=()=>{
             loaded: true,
             error,
         });
+        setIsThereAnError(true)
+        setGeoErrorCode(error.code)
+        setGeoErrorMessage(error.message)
         console.log(error)
     };
     const closeSnackbar=()=>{
@@ -112,10 +118,21 @@ const ScanQR=()=>{
    const startTimeout=()=>{
     
     async function timeout(){
-        setTimer(true)
-        await delay(2500)
-        setTimer(false)
-        startScanning()
+        if(isThereAnError){
+            console.log(geoErrorCode)
+            if(geoErrorCode===1){
+
+                setOpenSnack(true)
+                setSuccess("error")
+                setOpenSnackbarLabel("Permission for location is required")
+            }
+        }else{
+            setTimer(true)
+            await delay(5000)
+            setTimer(false)
+            startScanning()
+        }
+        
     }
     
     timeout()
@@ -127,6 +144,7 @@ const ScanQR=()=>{
 
     const startScanning = () => {
         console.log(address)
+        console.log(location)
 
         if(isScanning){
                 setIsScanning(false);
@@ -179,10 +197,20 @@ const ScanQR=()=>{
 
             console.log(now,end)
             console.log(address)
-            let addressHolder=address
-            if(address===null){
-                addressHolder=`lat:${location.coordinates.lat} lng:${location.coordinates.lng}`
+            let addressHolder=''
+
+            if(isThereAnError){
+                addressHolder=geoErrorMessage
+            }else{
+                if(address===null){
+                    addressHolder=`lat:${location.coordinates.lat} lng:${location.coordinates.lng}`
+                }else{
+                    addressHolder=address
+                }
+
             }
+            console.log(addressHolder)
+           
 
             if(now<start){
 
@@ -246,7 +274,7 @@ const ScanQR=()=>{
                     >
                    {snackbarLabel}
                     </Alert>
-                </Snackbar>
+            </Snackbar>
                 <Box sx={{
                     display: 'flex',
                     justifyContent: 'center', // Center horizontally
@@ -256,10 +284,11 @@ const ScanQR=()=>{
                 }}>
                
                     
-                    {circularTimer?<Typography >Getting location ...</Typography>:<></>}
+                    {circularTimer?<Typography >Trying to get location (5 secs) ...</Typography>:<></>}
                 
                 </Box>
             </>
+
         )
     
     }else{

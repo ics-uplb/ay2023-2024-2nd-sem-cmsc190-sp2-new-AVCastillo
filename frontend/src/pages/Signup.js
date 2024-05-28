@@ -213,7 +213,7 @@ const Signup = ()=>{
 
         }else if(!(passwordRegex.test(target))){
             setPasswordError(true)
-            setPasswordHelper("Should consist of atleast 1 uppercase, 1 lowercase, and 1 special character, and 1 digit")
+            setPasswordHelper("Should consist of atleast 1 uppercase, 1 lowercase, and 1 special character, and 1 digit (Do not use underscore)")
         }else{
             setPasswordError(false)
             setPasswordHelper("")
@@ -228,25 +228,31 @@ const Signup = ()=>{
         let newuser={firstName,lastName,studentNum,role,sex,email,password}
             if(role==="Teacher"){ 
                 if((firstName.length > 0 &&lastName.length > 0 &&role.length > 0 &&sex.length > 0 &&email.length > 0 &&password.length)>0){
-                    newuser= {firstName,lastName,studentNum:"",role,sex,email,password}
-                    try{
-                        await axios.post(`${process.env.REACT_APP_API_SERVER}/api/signup`,newuser,{withCredentials:true}).then(res =>{})
-                        setFname('')
-                        setLname('')
-                        setStudnum('')
-                        setRole('')
-                        setSex('')
-                        setEmail('')
-                        setPassword('')
-                        setDisableStudnum(false)
-                        setSnackbarLabel('New Student Added')
-                        setSuccess("success")
-                        setOpenSnack(true)
-        
-        
-                        
-                    }catch(e){
-                        setSnackbarLabel(e.response.data.error)
+                    if(!fNameError && !lNameError && !sexError && !roleError && !studentNumError && !emailError && !passwordError){
+                        newuser= {firstName,lastName,studentNum:"",role,sex,email,password}
+                        try{
+                            await axios.post(`${process.env.REACT_APP_API_SERVER}/api/signup`,newuser,{withCredentials:true}).then(res =>{})
+                            setFname('')
+                            setLname('')
+                            setStudnum('')
+                            setRole('')
+                            setSex('')
+                            setEmail('')
+                            setPassword('')
+                            setDisableStudnum(false)
+                            setSnackbarLabel('New User Added')
+                            setSuccess("success")
+                            setOpenSnack(true)
+            
+            
+                            
+                        }catch(e){
+                            setSnackbarLabel(e.response.data.error)
+                            setSuccess("error")
+                            setOpenSnack(true)
+                        }
+                    }else{
+                        setSnackbarLabel("Follow correct field format!")
                         setSuccess("error")
                         setOpenSnack(true)
                     }
@@ -256,26 +262,34 @@ const Signup = ()=>{
                     setOpenSnack(true)
                 }
             }else if(role==='Student'){
-                if((firstName.length > 0 &&lastName.length > 0 &&studentNum.length > 0 &&role.length > 0 &&sex.length > 0 &&email.length > 0 &&password.length)>0){
-                    newuser= {firstName,lastName,studentNum,role,sex,email,password}
-                    try{
-                        await axios.post(`${process.env.REACT_APP_API_SERVER}/api/signup`,newuser,{withCredentials:true}).then(res =>{})
-                        setFname('')
-                        setLname('')
-                        setStudnum('')
-                        setRole('')
-                        setSex('')
-                        setEmail('')
-                        setPassword('')
-                        setDisableStudnum(false)
-                        setSnackbarLabel('New Student Added')
-                        setSuccess("success")
-                        setOpenSnack(true)
-        
-        
-                        
-                    }catch(e){
-                        setSnackbarLabel(e.response.data.error)
+                if((firstName.length > 0 &&lastName.length > 0 &&studentNum.length > 0 &&role.length > 0 &&sex.length > 0 &&email.length > 0 &&password.length>0)){
+                    if((!fNameError && !lNameError && !sexError && !roleError && !studentNumError && !emailError && !passwordError)){
+
+                    
+                        newuser= {firstName,lastName,studentNum,role,sex,email,password}
+                        try{
+                            await axios.post(`${process.env.REACT_APP_API_SERVER}/api/signup`,newuser,{withCredentials:true}).then(res =>{})
+                            setFname('')
+                            setLname('')
+                            setStudnum('')
+                            setRole('')
+                            setSex('')
+                            setEmail('')
+                            setPassword('')
+                            setDisableStudnum(false)
+                            setSnackbarLabel('New User Added')
+                            setSuccess("success")
+                            setOpenSnack(true)
+            
+            
+                            
+                        }catch(e){
+                            setSnackbarLabel(e.response.data.error)
+                            setSuccess("error")
+                            setOpenSnack(true)
+                        }
+                    }else{
+                        setSnackbarLabel("Follow correct field format!")
                         setSuccess("error")
                         setOpenSnack(true)
                     }
@@ -397,7 +411,7 @@ const Signup = ()=>{
                 </Grid>
                 <Grid item xs={6} sm={8} md={12} lg={16}> 
                     <TextField marginBottom= {'5px'} type="password" label="Password" size= "small" 
-                    onChange={(e)=>{ setPassword(e.target.value);passwordFormat(e.target.value)}} helperText={passwordHelper}  error={passwordError} value={password} pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$" variant="outlined" fullWidth  /> 
+                    onChange={(e)=>{ setPassword(e.target.value);passwordFormat(e.target.value)}} helperText={passwordHelper}  error={passwordError} value={password}  variant="outlined" fullWidth  /> 
                 </Grid>
 
             </Grid>
