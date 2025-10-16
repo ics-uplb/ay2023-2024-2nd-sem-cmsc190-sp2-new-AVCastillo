@@ -1,4 +1,4 @@
-#My Special Problem: UPLB ARMS: QR Code-based Attendance Recording and Monitoring System
+# My Special Problem: UPLB ARMS: QR Code-based Attendance Recording and Monitoring System
 Authors: Adams Vincent R. Castillo and Asst. Prof Rizza D. Mercado
 
 Digitalization has revolutionized many traditional processes, including attendance tracking in educational institutions. This study aims to develop a mobile-friendly digital attendance recording and monitoring system for the 
