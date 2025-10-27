@@ -1,0 +1,597 @@
+\documentclass[journal]{./IEEE/IEEEtran}
+\usepackage{cite,graphicx, url}
+\usepackage[backend=biber]{biblatex}
+\def\UrlBreaks{\do\/\do\-}
+\usepackage[center]{caption}
+\usepackage{afterpage}
+
+
+\newcommand{\SPTITLE}{UPLB ARMS: QR Code-based Attendance Recording and Monitoring System}
+\newcommand{\ADVISEE}{Adams Vincent R. Castillo}
+\newcommand{\ADVISER}{Rizza D. Mercado}
+
+\newcommand{\BSCS}{Bachelor of Science in Computer Science}
+\newcommand{\ICS}{Institute of Computer Science}
+\newcommand{\UPLB}{University of the Philippines Los Ba\~{n}os}
+\newcommand{\REMARK}{\thanks{Presented to the Faculty of the \ICS, \UPLB\
+                             in partial fulfillment of the requirements
+                             for the Degree of \BSCS}}
+        
+\markboth{CMSC 190 Special Problem, \ICS}{}
+\title{\SPTITLE}
+\author{\ADVISEE~and~\ADVISER%
+\REMARK
+}
+\pubid{\copyright~2024~ICS\UPLB}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+% TITLE
+\maketitle
+
+% ABSTRACT
+\begin{abstract}
+Digitalization has revolutionized many traditional processes, including attendance tracking in educational institutions. This study aims to develop a mobile-friendly digital attendance recording and monitoring system for the University of the Philippines Los Baños (UPLB). The system utilizes QR code technology to streamline the attendance process, making it more efficient and less time-consuming for both students and instructors. The developed web application allows students to record their attendance by scanning a QR code provided by the instructor, thereby freeing up valuable class time for lectures and discussions. Instructors benefit from automated attendance logging and monitoring, reducing their administrative burden. Additionally, the system enables students to monitor their own attendance records, helping them avoid the consequences of excessive absences.
+\end{abstract}
+
+% INDEX TERMS
+\begin{keywords}
+digitalization, attendance tracking, QR code technology
+\end{keywords}
+
+% INTRODUCTION
+\section{Introduction}
+
+\subsection{Background of the Study}
+Digitalization is an adaptation of a system or a process to be operated with the use of computers and the Internet [1] . For most companies, it requires a shift away from traditional thinking towards a more collaborative and experimental approach which reveal solutions that can improve customer experience, drive employee innovation and spur company growth at the fundamental level [2]. With the fast-evolving technology and growing subscription on smartphones or mobile phones, digitalization has become more prevalent which revolutionized the world that we live in today. The simple tasks that people usually do such as banking, shopping, buying foods, and many more, have now been digitalized through the use of mobile and web applications which can be easily accessed using smartphones. 
+
+In the Philippines, the use of mobile and web applications as alternatives to traditional retail or cash mode of payment has become the norm, allowing platforms for e-wallet and online banking to flourish. In 2022, e-wallet or mobile wallets accounted for the highest share of payments during e-commerce transactions wherein platforms like Gcash and PayMaya are the leaders in the country's e-wallet market [3]. Furthermore, mobile banking has also found its place in the country as nearly three in every four Filipinos have banking applications on their smartphones and more than half of them use banking services at least once a week which attests to the convenience and accessibility it provides [4]. 
+
+Mobile and web applications have made traditional processes more efficient and accessible. However, these processes are still too procedural when it comes to making transactions. For example, when transferring money to another account, the user will have to input several details such as account number, destination bank, amount of money, and so forth that can be too taxing. With the advancement in smartphones, companies have been incorporating a new technology to their mobile and web applications to make processes more efficient; this technology is called the Quick Response (QR) code [5]. QR code is a digital barcode that stores information in a square grid of pixels. It is easily readable by digital devices, including smartphones with built-in QR code readers [6]. Nowadays, QR code technology finds widespread use in mobile banking and e-wallet platforms wherein transactions are done by just scanning a QR code instead of manually inputting transaction requirements which provides an extra level of convenience and efficiency for users. 
+
+The University of the Philippines Los Baños (UPLB) have long explored the world of digitalization. Aside from the infamous Student Academic Information System (SAIS), UPLB has also launched digitalization projects for its processes and systems such as document tracking and processing for all colleges, research study tracking for instructors, tracking system for libraries, and many more. Currently, the UPLB admin is campaigning for large-scale digital transformation of processes in UPLB which is called the UPLB Enterprise Architecture Plan or UPLB EAP [7]. 
+
+It is indeed evident that UPLB admin is trying their best to improve digitalization programs in the campus. However, there are still aspects that are not receiving enough attention. One of these is the recording and tracking of students’ class attendance which still relies on the traditional methods like passing a piece of paper with student details on it, writing down names on a sheet of paper that is passed around the classroom, and calling out student names one by one. Class attendance is one of the most important responsibilities that a UPLB student must comply with. Failure to do so will result in consequences that can eventually lead to forced dropping of a student’s course or units. With the lifting of the “No Fail Policy” or Memorandum No. 2022-09B, guidelines and rules regarding students’ class attendance have become stricter \\ \\ \\ \\ \\ \\ which also makes attendance tracking more crucial.
+
+
+\subsection{Statement of the Problem}
+While the traditional approach to tracking and managing attendance is generally seen as effective, it has numerous drawbacks. One of these drawbacks is its inefficiency in terms of time. In UPLB, the process of taking attendance varies from one instructor to another. However, what they all share in common is the substantial amount of time consumed during class hours due to the cumbersome procedures. This time could have been better utilized for lectures or discussions. Furthermore, instructors, particularly those teaching large lecture classes, face a heavy workload as they must manually monitor and record the attendance of large number of students. Lastly, the absence of attendance records for students can lead to significant problems, such as losing track of the number of absences. This, in turn, can result in more serious issues like being forced to drop a course or units.
+
+\subsection{Significance of the study}
+Nowadays, various attendance tracking systems are available, including those based on facial recognition, fingerprints, and GPS location [8]. However, for universities like UPLB with budget constraints, implementing such systems may not be feasible. Fortunately, recent technological advancements have led most smartphone manufacturers to include QR code scanning capabilities in their native camera apps [5]. By leveraging this feature and the idea that the main device that UPLB students use are smartphones, an alternative attendance recording and monitoring system can be developed without significant financial investment.
+
+The primary objective of the web application is to eliminate the need for students and instructors to adhere to traditional attendance recording methods. Instead, students can effortlessly record their attendance by scanning a QR code provided by the instructor, freeing up valuable time for lesson-related discussions and lectures. Instructors will no longer have to endure the cumbersome task of manual attendance recording since the system will automatically log the data once the student scans the QR code. Moreover, students will have access to their attendance records, enabling them to keep track of their attendance and avoid being forced to drop units.
+
+
+\subsection{Objectives of the study}
+The general objective of this study is to digitalize the process of student attendance recording and monitoring in UPLB through a web application. Specifically the web application aims:
+\begin{enumerate}
+    \item To enable teachers and students to record attendance with just a single scan.
+    \item To enable teachers and students to monitor attendance by providing a view of the attendance records.
+    \item To provide warning notification to students regarding their absences.
+    \item To evaluate the usability of QR Code-based Attendance Recording and Monitoring System through a survey.
+\end{enumerate}
+
+\subsection{Scope and Limitations}
+The focal point of this study is the development of an attendance recording and monitoring web application for UPLB students. Students will use the web application to record their attendance by scanning a QR code that will be posted by the instructor during class hours. Teachers will have access to the attendance record of the whole class while students will only have access to their own attendance record. The web application is limited to colleges or classes that are capable of strong wifi or mobile data connection. Furthermore, the web application will be tested in laboratory classrooms in the Institute of Computer Science (ICS) that have stable internet connection. 
+
+\section{Review of Related Literature}
+Traditional attendance monitoring and management has been the practice of many institutions and schools. However, despite its effectiveness, the downsides and limitations are very evident. In schools, students and teachers are complaining about the time consuming and hassle process of traditional tracking and recording of attendance. They believe that the time consumed on the process could’ve been better used on academic related activities (Chiang et. al) [9]. Consequently, with the rise of different technologies today, the transition from traditional to automated or digitalized approach of attendance monitoring and management is of high significance.  
+
+Nowadays diverse strategies employing various technologies have been employed in the development of attendance monitoring and management systems. Moshayedi et al. [10] conducted a study examining existing works in this domain, exploring approaches such as Biometric-based, facial recognition-based, Radio Frequency Identification (RFID) or Near Field Communication (NFC), and QR code-based attendance systems. The Biometric-based system utilizes unique biological or physical traits like palmprints, fingerprints, and irises. Biometric data is securely scanned through scanning devices, and software executes a program for feature extraction, storing it with the corresponding owner ID. The facial recognition-based system scans students' faces, comparing them to registered face images in the database using image processing techniques for attendance verification. The RFID/NFC system employs tags or cards with digitally stored information which are scanned via radio frequency readers. One particular implementation used RFID matrix cards to gather students’ attendance and then used Bluetooth for the teacher or professor to confirm the attendance before the data gets permanently sent to the main database. Lastly, the QR code-based system involves scanning a two-dimensional code via a web or mobile application to verify and record attendance. All approaches, except for facial recognition, have shown positive results in addressing issues with traditional attendance monitoring. Ultimately, among all approaches, the QR code-based attendance system seems to be the best approach to use as it was said to be the cheapest and easiest to implement.
+
+Utilization of QR code technology has been the trend for companies in different industries due to its cost-effective and efficient nature (Qianyu, 2014) [11]. With this same reason, the adaptation of the said technology in schools or institutions, particularly its integration on systems that aim to solve problems regarding traditional attendance management has been increasing. A study by Masalha and Hirzallah [12] proposes a QR code-based attendance system wherein the class instructor logs in through the Server Module to generate an encrypted QR code containing specific information before the class. During the class, students use the Mobile Module on their smartphones to scan the QR code. The Mobile Module captures the student's facial image during the scan and communicates the collected information to the Server Module for attendance confirmation. Additionally, the system records the mobile phone's location using GPS to ensure attendance tracking occurs within the classroom. The authors suggest that this system could potentially reduce the time spent on attendance tracking during class by approximately 90%.
+
+In 2017, a QR code-based attendance system was developed by Xiong et al. [13]. The system operates in two distinct phases. The initial phase involves a QR code Android app generator that requests students to input their roll number, generating a QR code accordingly. In the subsequent phase, a separate Android application is utilized by the teacher to scan the QR codes generated by students, thereby recording attendance for a specific subject. Additionally, this phase encompasses functionalities such as subject addition,  record deletion, and record exportation. The "add a subject" feature enables professors to include a subject and the associated students in the database. Conversely, the "delete records" feature empowers teachers to remove a subject from the database along with its corresponding data. Lastly, the "export records" feature allows teachers to download database data in either CSV or XLS format. After testing, the authors concluded that the system is an efficient way of recording attendance. 
+
+Another QR code-based attendance system was developed by Zailani et al. (2020) [14] as an alternative to the broken fingerprint-based staff attendance monitoring system at the Electrical Engineering Department of Polytechnic Ibrahim Sultan in Malaysia. The system employed a QR code generator named "monkey QR code" to create unique QR codes for each staff member in the Electrical Engineering Department. These QR codes serve as the primary components, being input into the database and printed onto the staff's ID cards. A mobile module, developed using MIT Inventor and integration of Android Barcode Scanner, is designed to scan the QR codes generated for each staff member. Following a successful scan, attendance data is stored in the Google Sheets database via Google Apps Script. In cases of failed QR code scanning, attendance will not be recorded. The authors concluded that the system was a great alternative to the fingerprint-based system as it only requires a smartphone and wifi, hence making it cost-effective. 
+
+In terms of acceptability, several studies are conducted to support QR code-based attendance systems. Maleriado and Carreon (2021) [15] conducted a study wherein an attendance system that utilizes two Android Google Play applications such as QR ATTENDANCE CONTROL and BARCODE SCANNER, along with an online QR code generator is used by 20 teachers and 36 students of General Emilio Aguinaldo National High School in Imus, Cavite for one quarter. The system is evaluated through survey questionnaires that consist of evaluation criteria that measure the level of acceptability. These evaluation criteria include reliability, efficiency, accuracy, usability, and security. Results have shown that teachers and students registered a composite mean evaluation of 4.27 and 4.5 respectively, with an overall grand mean of 4.39, indicating that the QR code-based attendance system is very much acceptable. A similar study that utilizes the same applications was conducted by Taracina in 2022 [16]. The system was evaluated by 30 teachers and 20 students of Buenavista National High School using a similar type of questionnaire which includes 7 evaluation criteria such as reliability, efficiency, accuracy, usability, time behavior, security, and safety. Results have shown that teachers and students rated the system a composite mean score of 3.73 and 3.52, respectively, with an overall grand mean of 3.63, indicating that the system is very highly acceptable. Furthermore, aside from being highly acceptable, the authors have also inferred that the two systems are both user-friendly, cost-effective, environmentally-friendly, and accessible. 
+
+The preceding reviews highlights the importance and benefits of using digitalized or automated attendance systems particularly those that are based in QR code technologies. Despite the existence of various attendance systems, the University of the Philippines Los Baños (UPLB) still relies on the traditional method of attendance tracking. This study aims to utilize the benefits of QR code technologies in developing an attendance monitoring and management system that will address the time-inefficient, hassle, and cost-ineffective nature of traditional attendance tracking.
+
+
+\section{Methodology}
+
+\subsection{Development Tools}
+A laptop with the following specifications will be used in developing the attendance system:
+
+\begin{itemize}
+    \item Operating System: Windows 11 64-bit
+    \item Processor: 11th Gen Intel(R) Core(TM) i5-11400H @ 2.70GHz   2.69 GHz
+    \item Memory: 16 GB DDR4 , 3200 MHz
+    \newline
+\end{itemize}
+\newline
+The following software development tools and technologies will be used in developing the attendance system:
+\begin{itemize}
+    \item \textbf{MongoDB} - A scalable, high-performance, and schema-less NoSQL database that will serve as the system’s database.
+    \item \textbf{Express JS} - A lightweight and flexible Node.js web application which will be used for the system’s backend development.
+    \item \textbf{React JS} - A JavaScript Library which will be used to develop the system’s frontend.
+    \item \textbf{Node JS} - A JavaScript runtime environment which will be used to execute the system’s server-side code.
+\end{itemize}
+
+\subsection{Features}
+This section is divided into two parts for each type of user: teacher and student.
+\newline
+\begin{enumerate}
+    \item [1.]  Teacher
+    \begin{itemize}
+        \item \textit{Sign-up}
+        \newline
+The user is required to sign-up in the application by filling up the following fields; first name, last name, sex, role, username, password. The user must choose the ‘Teacher’ option in the role field. This can be seen in Fig. 4 in the appendices section.
+        \item \textit{Log in}
+        \newline
+        The user can log in to the application using the provided username and password. This can be seen in Fig. 5 in the appendices section.
+         \item \textit{Create Class}
+        \newline
+        The user can create a class similar to the Google Classroom application wherein students can join or be added. When a student joins a class, the teacher will automatically have a record of his/her attendance and basic information which was previously filled out in the sign-up feature. This can be seen in Fig. 7 in the appendices section.
+         \item \textit{Generate QR Code}
+        \newline
+        The user can generate a QR Code which students will scan in order to record their attendance. This can be seen in Fig. 13 in the appendices section.
+         \item \textit{View Records}
+        \newline
+        The user has a view of the attendance records of all students in the class. This can be seen in Fig. 9 and Fig. 11 in the appendices section.
+
+         \item \textit{Validate Excused Attendance}
+        \newline
+        The user can validate excuse letters submitted by the student.This can be seen in Fig. 16 in the appendices section.
+         \item \textit{Revoke Attendance}
+        \newline
+        The user can revoke the attendance of a student in case of fraudulent acts. This can be seen in Fig. 12 in the appendices section.
+         \item \textit{Set Attendance Threshold}
+        \newline
+        The user can set the maximum number of absences a student can have. This will serve as a basis whether the student will be notified regarding his/her attendance or not. This can be seen in Fig. 15 in the appendices section.
+         \item \textit{Export Attendance}
+        \newline
+        The user can export the attendance sheet of the whole class as an excel file. This can be seen in Fig. 11 in the appendices section.
+        \item \textit{Detect Fraudulent Activities}
+         \newline
+        The user can detect if two or more accounts used the same device to log in through the utilization of browser cookies. These users will be flagged as “FRAUD” in the user’s point of view. Furthermore, the location where the attendance recording process took place will be recorded to ensure that the student will do it inside the classroom. This can be seen in Fig. 10 and Fig. 14 in the appendices section.
+       
+    \end{itemize}
+  \item[2.] Student
+        \begin{itemize}
+            \item \textit{Sign-up}
+            \newline
+            The user is required to sign-up in the application by filling up the following fields; first name, last name, sex, role, student number, username, password. The user must choose the ‘Student’ option in the role field. This can be seen in Fig. 18 in the appendices section.
+            \item \textit{Log in}
+            \newline
+            The user can log in to the application using the provided username and password. This can be seen in Fig. 19 in the appendices section.
+            \item \textit{Join Class}
+            \newline
+            The user can join a class that is created by the teacher. This can be seen in Fig. 20 in the appendices section.
+            \item \textit{Scan QR Code}
+            \newline
+            The user can scan a QR Code generated by the teacher. If the scan was successful, the user will be marked as ‘present’, otherwise he/she will be marked as ‘absent’. This can be seen in Fig. 29 and Fig. 30 in the appendices section.
+            \item \textit{Submit Excuse Letter}
+            \newline
+            The user can submit an excuse letter in case he/she has a valid excuse regarding an absence. The excuse letter will be validated by the teacher. If the excuse letter was accepted, the student will be marked as ‘excused’, otherwise the ‘absent’ label will not change. This can be seen in Fig. 24 in the appendices section.
+            \item \textit{Absence Warning}
+            \newline
+            If the user reaches the threshold for the number of absences set by the teacher, he/she will be notified about it. This can be seen in Fig. 26, 27, and 28 in the appendices section.
+            \item \textit{View Records} 
+            \newline
+            The user can view his/her own attendance record on a certain class. This can be seen in Fig. 22 in the appendices section.
+            \item \textit{Export Records}
+            \newline
+            The user can export his/her own attendance sheet as an excel file. This can be seen in Fig. 25 in the appendices section.
+            \newline
+        \end{itemize}
+        
+\end{enumerate}
+
+\newline
+\textit{The Use Case diagram for the QR Code-based Attendance Recording and Monitoring System is shown in Figure 1 in the appendices section.}
+
+% \includegraphics[width=0.5\textwidth]{ICS-template/UseCaseSp.drawio.png}
+% \newline
+
+% \textit{Fig. 1. A Use Case Diagram for the QR Code-based Attendance Recording and Monitoring System.}
+
+\subsection{Databse Design}
+The database design consists of three entities namely, teacher, student, class, and attendance record. Each entity has a unique ID. The entity-relationship diagram is shown in Figure 2 in the appendices section.
+
+
+% \includegraphics[width=0.5\textwidth]{ICS-template/ERD_SP1.jpg}
+% \newline
+
+% \caption{\textit{Fig. 2. Entity- Relationship Diagram for the QR Code-based Attendance Recording and Monitoring System. }}
+
+\subsection{Flowchart}
+The flowchart for the QR Code-based Attendance Recording and Monitoring System is shown in Figure 3 in the appendices section.
+\newline
+
+
+\subsection{User Evaluation}
+After using the application, the users will be given a Post-Study System Usability Questionnaire (PSSUQ).  PSSUQ is a 16-item standardized questionnaire which is widely used to measure users’ perceived satisfaction of a website, software, system or product at the end of a study [17]. The questions were the following:
+
+\begin{enumerate}
+    \item Overall, I am satisfied with how easy it is to use this system.
+    \item It was simple to use this system.
+    \item I was able to complete the tasks and scenarios quickly using this system.
+    \item I felt comfortable using this system.
+    \item It was easy to learn to use this system.
+    \item I believe I could become productive quickly using this system.
+    \item The system gave error messages that clearly told me how to fix problems.
+    \item Whenever I made a mistake using the system, I could recover easily and quickly.
+    \item The information (such as online help, on-screen messages, and other documentation) provided with this system was clear.
+    \item It was easy to find the information I needed.
+    \item The information was effective in helping me complete the tasks and scenarios.
+    \item The organization of information on the system screens was clear.
+    \item The interface of this system was pleasant.
+    \item I liked using the interface of this system.
+    \item This system has all the functions and capabilities I expect it to have.
+    \item Overall, I am satisfied with this system.
+    \newline
+\end{enumerate}
+Users will answer the PSSUQ through a 7-point Likert Scale with an inclusion of an “NA” option. The PSSUQ score will start from 1 as “strongly agree” and ends with 7 as “strongly disagree.” To evaluate the usability of the QR Code-based Attendance Recording and Monitoring System, the average score for the 16 questions across all users will be computed. In case of an “NA” answer on a certain question, that question will not be included in the computation of the average score.Furthermore, to evaluate the efficiency of the system, the average score for questions 1 to 6 across all users will be computed. Lastly, since the usual class size of a laboratory class in ICS is 20, the target number of respondents for the PSSUQ will be 20. 
+
+\section{Results and Discussion}
+
+\subsection{Development Stage}
+During the development of the web application, the researcher encountered a problem regarding the Cross-Origin Resource Sharing (CORS) policy that significantly delayed the deployment process. This problem causes an error that blocks the Uniform Resource Locator (URL) of the web application, thus inhibiting any Application Programming Interface (API) calls to the server which make the features of the application unusable. In order to address this, the researcher has done various trial and error processes in the codebase of the application. The first step that the researcher did was to modify the CORS options for the server using the CORS middleware of Express JS. However, despite numerous attempts, the problem still persisted. The researcher has then tried another way by redeploying the codebase of the application but still got the same results. It is only through the refactoring of the codebase, particularly the structure of the  controllers, routers, and middlewares in the back-end part that solved the problem.
+
+The researcher used free-tier services of the platforms Render and Vercel in deploying the back-end and front-end part of the codebase respectively which has caused a minor limitation for the web application. In particular, the free-tier service of Render forces the server to sleep whenever no one is using the application. This makes the initial log-in or sign-up on the application last for a while since it waits for the server to become live again. However, despite this limitation, the web application was still able to perform its functionalities which allowed the users to use it and evaluate its performance. 
+
+Initially, one of the proposed features for the web application is its ability to allow students to record attendance on certain locations in order to prevent fraudulent activities. The technology that was used to implement this was the Geolocation API in Javascript which retrieves the longitude and latitude coordinates of a student user’s device. By performing the necessary calculations, the researcher was able to limit the process of attendance recording on a certain place using the current coordinates of the  student user’s device and the coordinates that teacher has set. However, the accuracy of the coordinates that the Geolocation API provides was found out to be not always reliable. This is due to the factors such as unstable wifi connection and poor GPS signal. With this limitation, the researcher tried to find other ways of getting more accurate location coordinates, but failed to do so. Hence, since the initial proposed feature for location retrieving has a tendency to become counterproductive to its purpose, the researcher decided to modify it. In the modified feature, the web application will no longer limit attendance recording on certain places, but rather, it will just include the location in the details of attendance records. Through this, the teacher can still have some layer of protection from fraudulent activities. 
+
+\subsection{Student user-side application}
+The first thing a user should do is create an account by clicking or tapping the register button in the front page of the application and fill in all the necessary details. After creating an account, a user should use the registered email and password in order to log into the web application. A successful login will redirect a user to the dashboard wherein he/she can join a class using a class code that is provided by the teacher. If a user has already joined a class, that class will appear in the dashboard wherein the user can either view or leave by clicking the eye and  leave icon respectively. Inside a class page, there are three tabs which are the “RECORDS”, “QR”, “NOTIFICATIONS.” The “RECORDS” tab shows  the attendance records of the user for all the meetings in that class along with other details like date of recording and the location where the attendance was recorded. In addition, it also shows absence and unexcused absence counters and warnings. Furthermore, a user can also see the number of his/her unscanned attendances in this tab. The “QR” tab is used to record an attendance by scanning the QR code that is provided by the teacher. A user can either scan the QR code using the device camera or import it as an image. If a user scans the QR code before the class time schedule starts, a prompt saying that the class hasn’t started yet will appear. On the other hand, if a user scans the QR code within the class time schedule, the attendance will either be marked as “Present” or “Late”. The label will only become “Late” if a user scans the QR Code 15 minutes after the start of the class time schedule. Lastly, if a user fails to scan the QR code within the class time schedule, it will automatically be labeled as “Absent”.  The “NOTIFICATIONS” page shows fraudulent activity alerts and attendance modification done by the teacher. A class settings feature can also be found in the top rightmost part of the class page which shows the names of teachers and students in a certain class. In addition, account settings can also be found in the top rightmost part of the dashboard where a user can see and modify account details.
+
+\subsection{Teacher user-side application}
+The first thing a user should do is create an account by clicking the register button in the front page of the application and fill in all the necessary details. After creating an account, a user should use the registered email and password in order to log into the web application. A successful login will redirect a user to the dashboard. The dashboard contains two buttons; one for creating a class and another one for viewing all classes. To create a class, a user should tap or click the “CREATE CLASS” button and input the class name, class section, and class code in the dialog box. By tapping or clicking the “VIEW CLASS” button, the user will be redirected to the classes page wherein the newly and previously created classes can be seen. A user can either view or delete a certain class by tapping or clicking the eye and trash bin icon respectively. Inside a class page, there are four tabs which are the “RECORDS”, “QR”, “EXCUSE”,“NOTIFICATIONS.” The “RECORDS” tab has two views; one for the attendance records of all students in the class for a certain class schedule and one for the attendance records of all students for the whole semester which the user can export as an excel file. For the first view, each attendance record can be filtered by searching a certain date or schedule of the class in the search bar. Furthermore, a user can see the attendance label, submitted excuse letter, date of recording, and the location where the recording took place. Each attendance can also be modified by the user. For the second view, only the attendance label is visible for the user. In the “QR” tab, a user can generate a QR code for a certain attendance schedule. The generated QR code can be downloaded so it can be scanned by the students. In the “EXCUSE” tab, all the submitted excuse letters in the class are displayed. Lastly, the “NOTIFICATIONS” tab displays fraudulent activities and excuse letter submission notifications.  A class settings feature can also be found in the top rightmost part of the class page which shows the names of teachers and students in a certain class and a pencil icon that is used to set the maximum class absence threshold. In addition, account settings can also be found in the top rightmost part of the dashboard where a user can see and modify account details.
+
+\subsection{Testing}
+The student user-side of the QR Code-based Attendance Recording and Monitoring System, was supposed to be tested in an actual classroom setting in the Institute of Computer Science (ICS). However, due to unforeseen circumstances, the researcher was unable to make it happen. As an alternative, 20 UPLB students were gathered to test the system in one of the computer laboratories in ICS to simulate an actual class. After testing, each student was tasked to answer a Post-Study System Usability Questionnaire (PSSUQ) through Google Forms in order to evaluate the usability of the system. Upon completion of the survey, the average of the mean scores of each question for all students was computed, resulting in an overall mean score of 1.503125, as shown in Fig.3 in the appendices section. Based on the overall mean score, the usability of the system can be classified as excellent. Furthermore, based on Fig.13 in the appendices section, the overall mean score of Question 1 to Question 6 is 1.30833333, indicating that the efficiency of the system is of high satisfaction. 
+
+
+
+The teacher user-side of the QR Code-based Attendance Recording and Monitoring System was tested by one of the instructors in the ICS. After testing, the instructor was also tasked to answer a Post-Study System Usability Questionnaire (PSSUQ) through Google Forms in order to evaluate the usability of the system. Upon completion, the average score for all the questions was computed which resulted in an overall mean score of 1.875, as shown in Fig. 34 in the appendices section. Based on the overall mean score, the usability of the system can be classified as excellent. Furthermore, based on Fig.34 in the appendices section, the overall mean score of Question 1 to Question 6 is 1.5, indicating that the efficiency of the system is of high satisfaction.
+
+
+
+\section{Conclusion and Future Work}
+The study was able to develop a mobile-friendly digital attendance recording and monitoring system for the students and teachers of the University of the Philippines Los Baños. The teacher user-side application enables users to generate a QR code for a certain class time schedule. This QR code can be scanned by the users in the student user-side application to record their attendance. Users in both teacher and student user-side applications can also monitor the attendance through the records feature of the system. Teacher users have a view of the attendance records of all the students in the class. On the other hand, student users have a view of their own attendance record in a certain class. Furthermore, student users can also see the number of absences they have in a certain class. An absence warning will appear in the student user-side application if a user is about to reach, has reached, and has exceeded the absence threshold of a class.
+
+For future work, it is recommended to incorporate a new feature to the system wherein the users in the teacher user-side application can have the ability to limit the attendance recording process to a certain wifi connection. This means that the users in the student user-side application can only record attendance if their device is connected to a wifi network of a certain laboratory or classroom. Through this, the threat of any fraudulent activity will be eradicated. Moreover, statistics features like graphs and charts can also be implemented in order for the users in the teacher user-side application to see the absence and attendance rates of the students in a certain class. Lastly, future researchers may also use the paid-tier services of Render and Vercel or any other deployment platforms in order to ensure a better user experience. 
+
+
+
+\section{Appendices}
+
+\begin{figure*}
+    \centering
+    \includegraphics[width=1\textwidth]{ICS-template/UseCaseSp.drawio.png}
+    \newline
+    \caption{\textit{A Use Case Diagram for the QR Code-based Attendance Recording and Monitoring System.}}
+\end{figure*}
+\newline
+\begin{figure*}
+    \centering
+    \includegraphics[width=1\textwidth]{ICS-template/ERD_SP1.jpg}
+    \newline
+
+    \caption{\textit{Entity- Relationship Diagram for the QR Code-based Attendance Recording and Monitoring System. }}
+\end{figure*}
+
+
+
+\begin{figure*}
+    \centering
+    \includegraphics[width=1\textwidth]{ICS-template/flow_fin.png}
+    \newline
+    \caption{\textit{Flowchart for the QR Code-based Attendance Recording and Monitoring System. }}
+\end{figure*}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.25\textwidth,inner]{ICS-template/teacher-signup.PNG}
+    \newline
+    \caption{\textit{Sign up page for Teachers}}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.25\textwidth,left]{ICS-template/teacher-login.PNG}
+    \newline
+    \caption{\textit{Login page for Teachers}}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.25\textwidth,inner]{ICS-template/teacher-dashboard.PNG}
+    \newline
+    \caption{\textit{Teacher dashboard page}}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.25\textwidth,inner]{ICS-template/create-class.PNG}
+    \newline
+    \caption{\textit{Create a class}}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.25\textwidth,inner]{ICS-template/view-classes.PNG}
+    \newline
+    \caption{\textit{View all classes for Teachers}}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.25\textwidth,left]{ICS-template/teacher-view1.PNG}
+    \newline
+    \caption{\textit{Attendance records view 1 for Teachers}}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.25\textwidth,left]{ICS-template/attendance-details.PNG}
+    \newline
+    \caption{\textit{Attendance details for Teacher view 1}}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.25\textwidth,inner]{ICS-template/teacher-view2.PNG}
+    \newline
+    \caption{\textit{Attendance records view 2 for Teachers.}}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.25\textwidth,inner]{ICS-template/modify-revoke-attendance.PNG}
+    \newline
+    \caption{\textit{Modify or revoke attendance}}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.25\textwidth,inner]{ICS-template/generate-qr.PNG}
+    \newline
+    \caption{\textit{Generate QR code}}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.25\textwidth,left]{ICS-template/teacher-notifications.PNG}
+    \newline
+    \caption{\textit{Teacher notifications}}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.25\textwidth,inner]{ICS-template/set-threshold.PNG}
+    \newline
+    \caption{\textit{Set class absence threshold}}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.25\textwidth,inner]{ICS-template/view-excuse-letters.PNG}
+    \newline
+    \caption{\textit{Verify/view excuse letters for Teachers}}
+\end{figure}
+
+
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.25\textwidth,left]{ICS-template/teacher-account-settings.PNG}
+    \newline
+     \caption{\textit{Teacher account settings}}
+    
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.25\textwidth,left]{ICS-template/student-signup.PNG}
+    \newline
+     \caption{\textit{Student sign-up page}}
+    
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.25\textwidth,left]{ICS-template/student-login.PNG}
+    \newline
+     \caption{\textit{Student login page}}
+    
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.25\textwidth,left]{ICS-template/join-class.PNG}
+    \newline
+     \caption{\textit{Student join class}}
+    
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.25\textwidth,left]{ICS-template/student-dashboard.PNG}
+    \newline
+     \caption{\textit{Student dashboard}}
+    
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.25\textwidth,left]{ICS-template/student-records.PNG}
+    \newline
+     \caption{\textit{Student attendance records }}
+    
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.25\textwidth,left]{ICS-template/attendance-details-student.PNG}
+    \newline
+     \caption{\textit{Student attendance details }}
+    
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.25\textwidth,left]{ICS-template/submit-letter.PNG}
+    \newline
+     \caption{\textit{Student submit excuse letter }}
+    
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.25\textwidth,left]{ICS-template/student-export-records.PNG}
+    \newline
+     \caption{\textit{Student export attendance records }}
+    
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.25\textwidth,left]{ICS-template/exceed-warning.PNG}
+    \newline
+     \caption{\textit{Student Absence warning (exceeded the class absence threshold) }}
+    
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.25\textwidth,left]{ICS-template/close-warning.PNG}
+    \newline
+     \caption{\textit{Student Absence warning (about to reach the class absence threshold) }}
+    
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.25\textwidth,left]{ICS-template/reached-warning.PNG}
+    \newline
+     \caption{\textit{Student Absence warning (reached the class absence threshold) }}
+    
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.25\textwidth,left]{ICS-template/scanqr-camera.PNG}
+    \newline
+     \caption{\textit{Scan QR code using camera }}
+    
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.25\textwidth,left]{ICS-template/scanqr-file.PNG}
+    \newline
+     \caption{\textit{Scan QR code using an image }}
+    
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.25\textwidth,left]{ICS-template/student-notifs.PNG}
+    \newline
+     \caption{\textit{Student Notifications }}
+    
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.25\textwidth,left]{ICS-template/student-edit-acc-details.PNG}
+    \newline
+     \caption{\textit{Student account settings }}
+    
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.25\textwidth,left]{ICS-template/data-student.png}
+    \newline
+     \caption{\textit{Computed mean scores for the student user-side applications }}
+    
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.25\textwidth,left]{ICS-template/data-teacher.png}
+    \newline
+     \caption{\textit{Computed mean scores for the teacher user-side application}}
+    
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.25\textwidth,left]{ICS-template/blank.png}
+    \newline
+     
+    
+\end{figure}
+
+
+
+
+
+
+\setcounter{biburllcpenalty}{7000}
+\setcounter{biburlucpenalty}{8000}
+
+% % BIBLIOGRAPHY
+% \bibliographystyle{./IEEE/IEEEtran}
+% \bibliography{./cs190-ieee}
+% % \nocite{*}
+
+
+% % BIOGRAPHY
+% \begin{biography}[{\includegraphics{./yourPicture.eps}}]{Adams Vincent R. Castillo}
+% \end{biography}
+\afterpage{
+  \clearpage
+
+    % ACKNOWLEDGMENT
+\section*{Acknowledgment}
+
+I want to express my sincere gratitude to my Special Problem adviser, Prof. Rizza D. Mercado, for her invaluable guidance and wisdom. I am also thankful to the UP Isabela Society and the UPLB Computer Science Society for their encouragement. Above all, my deepest appreciation goes to my family and close friends who have supported and motivated me from the very beginning.
+% REFERENCE
+\section*{REFERENCE}
+[1] [Definition of digitalization]. Oxford Dictionaries. https://ph.search.yahoo.com/search?fr=mcafee\&type=E210PH9
+1215G0\&p=what+is+digitalization 
+
+[2] “Digital transformation: Understand digital transformation and how our insights can help drive business values.” accenture. https://www.accenture.com/us-en/insights/digital-transformation-index
+
+[3] Statista Research Department. “E-commerce in the Philippines - statistics \& facts.” Statista. https://www.statista.com/topics/6539/e-commerce-in-the-philippines/\#topicOverview (accessed Jul. 6, 2023).
+
+[4] “More Filipinos using their smartphones for mobile banking and payments – Visa Study.” VISA.https://www.visa.com.ph/about-visa/newsroom/press-releases/more-filipinos-using-their-smartphones-for-mobile-banking-and-payments-visa-study.html (accessed Nov. 7, 2017).
+
+[5] G. Garg. “Future of QR Codes: 2022 And Beyond.” Scanova Blog.https://scanova.io/blog/qr-codes-future/ (accessed Jul. 3, 2023).
+
+[6] “QR Code Security: What are QR codes and are they safe to use?.” kapersky. 
+https://www.kaspersky.com/resource-center/definitions/what-is-a-qr-code-how-to-scan
+
+[7] “UPLB plots IT transformation roadmap.” University of the Philippines Los Baños CAMPUS NEWS. https://uplb.edu.ph/all-news/uplb-plots-it-transformation-roadmap/ (accessed Dec. 25, 2021). 
+
+[8] B. A. Abdalkarim and D. Akgün, “A Literature review on smart Attendance Systems,” ResearchGate, Jul. 2022, [Online]. Available: https://www.researchgate.net/publication/362405196\_A\_Literat
+ure\_Review\_on\_Smart\_Attendance\_Systems
+
+[9] T. Chiang et al., "Development and Evaluation of an Attendance Tracking System Using Smartphones with GPS and NFC," Taylor \& Francis, 
+May 2022, [Online]. Available: https://doi.org/10.1080/08839514.2022.2083796
+
+[10] A. Moshayedi et al., "Automation Attendance Systems Approaches: A Practical Review," ResearchGate, Jan. 2021, [Online]. Available: https://www.researchgate.net/publication/360789429.
+ 
+[11] J. Quianyu, "EXPLORING THE CONCEPT OF QR CODE AND THE BENEFITS OF USING QR CODE FOR COMPANIES," Lapland University of Applied Sciences, 2014, [Online]. Available: https://www.theseus.fi/handle/10024/85796
+
+[12] F. Masalha and N. Hirzallah, “A students attendance system using QR code,” International Journal of Advanced Computer Science and Applications, vol. 5, no. 3, Jan. 2014, doi: 10.14569/ijacsa.2014.050310.
+
+[13] W. Xiong, A. Manori, N. Devnath, N. Pasi, and V. Kumar, "QR Code Based Smart Attendance System," International Journal of Smart Business and Technology, vol. 5, no. 1, pp. 1–10, Mar. 2017, doi: 10.21742/ijsbt.2017.5.1.01.
+
+[14] N. Zailani, H. Ahmad, and A. Adli, "QR Code Attendance System," ResearchGate, Dec. 2020, doi: 10.5281/zenodo.4310523.
+
+[15] M. Maleriado and J. Carreon, "THE FEATURES OF QUICK RESPONSE (QR) CODE AS AN ATTENDANCE MONITORING SYSTEM: ITS  ACCEPTABILITY AND IMPLICATION TO CLASSROOM," ResearchGate, May 2019, [Online]. Available: https://www.researchgate.net/publication/353701451.
+
+[16] J. Taracina, "Acceptability and Effectiveness of a Proposed Attendance Monitoring System (ASAP) for Safety of the Stakeholders," Scholarum: Journal of Education, Mar. 2023, [Online]. Available: https://scholarum.dlsl.edu.ph/wp-content/uploads/2023/03/V2I2-Article-4-Jairoh-Nicolas-Taracina.pdf.
+
+[17] W. T, “PSSUQ (Post-Study System Usability Questionnaire),” UIUX Trend, Feb. 09, 2021. https://uiuxtrend.com/pssuq-post-study-system-usability-questionnaire/
+
+
+
+
+
+  
+  \begin{biography}[{\includegraphics{ICS-template/avpic.JPG}}]{Adams Vincent R. Castillo}
+  is a Computer Science student at the University of the Philippines Los Banos.He has been a member of the UPLB Computer Science Society since 2020. He also served as the Auditor of the UP Isabela Society (A.Y. 2023-2024).
+  \end{biography}
+}
+
+
+\end{document}
+ 
