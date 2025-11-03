@@ -1,3 +1,5 @@
+Checked by RDCMercado on November 3, 2025
+
 # My Special Problem: UPLB ARMS: QR Code-based Attendance Recording and Monitoring System
 Authors: Adams Vincent R. Castillo and Asst. Prof Rizza D. Mercado
 
